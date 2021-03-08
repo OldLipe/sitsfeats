@@ -90,11 +90,6 @@ arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line) {
   return pts_values;
 }
 
-// [[Rcpp::export]]
-double integrand(double x){
-  return(sin(x));
-}
-
 // // [[Rcpp::depends(grDevices)]]
 // // [[Rcpp::export]]
 // Rcpp::List integratecpp(double llim, double ulim)
