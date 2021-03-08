@@ -603,6 +603,7 @@ ecc_metric.numeric <- function(timeseries) {
 #' @return ...
 MBR <- function(p) {
   # Analyze the convex hull edges
+  browser(0)
   a <- grDevices::chull(p)                        # Indexes of extremal points
   a <- c(a, a[1])                                 # Close the loop
   e <- p[a[-1],] - p[a[-length(a)], ]             # Edge directions

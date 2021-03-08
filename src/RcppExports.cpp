@@ -193,6 +193,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// convexHullRcpp
+Rcpp::NumericMatrix convexHullRcpp(SEXP pointsMatrixSEXP);
+RcppExport SEXP _sitsfeats_convexHullRcpp(SEXP pointsMatrixSEXPSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type pointsMatrixSEXP(pointsMatrixSEXPSEXP);
+    rcpp_result_gen = Rcpp::wrap(convexHullRcpp(pointsMatrixSEXP));
+    return rcpp_result_gen;
+END_RCPP
+}
 // calculate_vec
 arma::mat calculate_vec(const arma::vec& timeseries);
 RcppExport SEXP _sitsfeats_calculate_vec(SEXP timeseriesSEXP) {
@@ -247,6 +258,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::mat& >::type pts_cent(pts_centSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type pts_line(pts_lineSEXP);
     rcpp_result_gen = Rcpp::wrap(gr_calc(pts_cent, pts_line));
+    return rcpp_result_gen;
+END_RCPP
+}
+// integrand
+double integrand(double x);
+RcppExport SEXP _sitsfeats_integrand(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(integrand(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -347,11 +369,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_sqr_ts", (DL_FUNC) &_sitsfeats_sqr_ts, 1},
     {"_sitsfeats_iqr_ts", (DL_FUNC) &_sitsfeats_iqr_ts, 1},
     {"_sitsfeats_row_wide_loop", (DL_FUNC) &_sitsfeats_row_wide_loop, 1},
+    {"_sitsfeats_convexHullRcpp", (DL_FUNC) &_sitsfeats_convexHullRcpp, 1},
     {"_sitsfeats_calculate_vec", (DL_FUNC) &_sitsfeats_calculate_vec, 1},
     {"_sitsfeats_calculate_vec_v2", (DL_FUNC) &_sitsfeats_calculate_vec_v2, 1},
     {"_sitsfeats_calculate_vec_v3", (DL_FUNC) &_sitsfeats_calculate_vec_v3, 1},
     {"_sitsfeats_calc_distance", (DL_FUNC) &_sitsfeats_calc_distance, 2},
     {"_sitsfeats_gr_calc", (DL_FUNC) &_sitsfeats_gr_calc, 2},
+    {"_sitsfeats_integrand", (DL_FUNC) &_sitsfeats_integrand, 1},
     {"_sitsfeats_teste_linspace", (DL_FUNC) &_sitsfeats_teste_linspace, 2},
     {"_sitsfeats_linspace_vec", (DL_FUNC) &_sitsfeats_linspace_vec, 1},
     {"_sitsfeats_calc_csi", (DL_FUNC) &_sitsfeats_calc_csi, 2},

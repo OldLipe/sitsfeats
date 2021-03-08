@@ -2,6 +2,8 @@
 #include <Rcpp.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 
+using namespace Rcpp;
+
 
 // [[Rcpp::export]]
 arma::mat calculate_vec(const arma::vec& timeseries) {
@@ -87,6 +89,39 @@ arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line) {
   }
   return pts_values;
 }
+
+// [[Rcpp::export]]
+double integrand(double x){
+  return(sin(x));
+}
+
+// // [[Rcpp::depends(grDevices)]]
+// // [[Rcpp::export]]
+// Rcpp::List integratecpp(double llim, double ulim)
+// {
+//   Rcpp::Function p_cubature = R_GetCCallable("cubature", "adapt_integrate");
+//
+//   Rcpp::List result = p_cubature(integrand, llim, ulim);
+//   return(result);
+// }
+
+// // [[Rcpp::depends(grDevices)]]
+// // [[Rcpp::export]]
+// arma::vec integratecpp(arma::mat& llim) {
+//   Rcpp::Function p_chull = R_GetCCallable("grDevices", "chull");
+//
+//   arma::vec result = p_chull(llim);
+//   return(result);
+// }
+
+// // [[Rcpp::export]]
+// arma::vec integratecpp(arma::mat& llim) {
+//   //Rcpp::Function p_chull = R_GetCCallable("grDevices", "chull");
+//
+//   arma::vec result = chull(llim);
+//   return(result);
+// }
+
 
 // [[Rcpp::export]]
 arma::vec teste_linspace(const arma::mat& r, const arma::uword len) {

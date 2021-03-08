@@ -69,6 +69,10 @@ row_wide_loop <- function(x) {
     .Call(`_sitsfeats_row_wide_loop`, x)
 }
 
+convexHullRcpp <- function(pointsMatrixSEXP) {
+    .Call(`_sitsfeats_convexHullRcpp`, pointsMatrixSEXP)
+}
+
 calculate_vec <- function(timeseries) {
     .Call(`_sitsfeats_calculate_vec`, timeseries)
 }
@@ -87,6 +91,10 @@ calc_distance <- function(line, pts_cent) {
 
 gr_calc <- function(pts_cent, pts_line) {
     .Call(`_sitsfeats_gr_calc`, pts_cent, pts_line)
+}
+
+integrand <- function(x) {
+    .Call(`_sitsfeats_integrand`, x)
 }
 
 teste_linspace <- function(r, len) {
