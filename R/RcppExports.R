@@ -97,6 +97,10 @@ linspace_vec <- function(timeseries) {
     .Call(`_sitsfeats_linspace_vec`, timeseries)
 }
 
+calc_angle <- function(timeseries) {
+    .Call(`_sitsfeats_calc_angle`, timeseries)
+}
+
 calc_csi <- function(line_length, poly_area) {
     .Call(`_sitsfeats_calc_csi`, line_length, poly_area)
 }

@@ -123,13 +123,31 @@ arma::vec teste_linspace(const arma::mat& r, const arma::uword len) {
   return arma::linspace<arma::vec>(0,r.n_rows, len);
 }
 
-// [[Rcpp::export]]
-arma::vec linspace_vec(const arma::vec& timeseries) {
+// // [[Rcpp::export]]
+// arma::vec linspace_vec(const arma::vec& timeseries) {
+//
+//   // realizar essa operacao de forma matricial arma::index_max
+//
+//   return arma::linspace<arma::vec>(0, 2*arma::datum::pi, timeseries.n_elem);
+// }
 
-  // realizar essa operacao de forma matricial arma::index_max
+// [[Rcpp::export]]
+arma::vec linspace_vec(const arma::rowvec& timeseries) {
 
   return arma::linspace<arma::vec>(0, 2*arma::datum::pi, timeseries.n_elem);
 }
+
+// [[Rcpp::export]]
+arma::vec calc_angle(const arma::mat& timeseries) {
+
+  arma::vec pts(timeseries.n_rows, arma::fill::zeros);
+
+  for (arma::uword i = 0; i < timeseries.n_rows; i++) {
+    pts(i) = linspace_vec(timeseries.row(i)).at(arma::index_max(timeseries.row(i)));
+  }
+  return pts;
+}
+
 // [[Rcpp::export]]
 arma::vec calc_csi(const arma::vec& line_length, const arma::vec& poly_area){
   return arma::square(line_length)/(4 * arma::datum::pi * poly_area);

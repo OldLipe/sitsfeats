@@ -263,13 +263,24 @@ BEGIN_RCPP
 END_RCPP
 }
 // linspace_vec
-arma::vec linspace_vec(const arma::vec& timeseries);
+arma::vec linspace_vec(const arma::rowvec& timeseries);
 RcppExport SEXP _sitsfeats_linspace_vec(SEXP timeseriesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::vec& >::type timeseries(timeseriesSEXP);
+    Rcpp::traits::input_parameter< const arma::rowvec& >::type timeseries(timeseriesSEXP);
     rcpp_result_gen = Rcpp::wrap(linspace_vec(timeseries));
+    return rcpp_result_gen;
+END_RCPP
+}
+// calc_angle
+arma::vec calc_angle(const arma::mat& timeseries);
+RcppExport SEXP _sitsfeats_calc_angle(SEXP timeseriesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type timeseries(timeseriesSEXP);
+    rcpp_result_gen = Rcpp::wrap(calc_angle(timeseries));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -354,6 +365,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_gr_calc", (DL_FUNC) &_sitsfeats_gr_calc, 2},
     {"_sitsfeats_teste_linspace", (DL_FUNC) &_sitsfeats_teste_linspace, 2},
     {"_sitsfeats_linspace_vec", (DL_FUNC) &_sitsfeats_linspace_vec, 1},
+    {"_sitsfeats_calc_angle", (DL_FUNC) &_sitsfeats_calc_angle, 1},
     {"_sitsfeats_calc_csi", (DL_FUNC) &_sitsfeats_calc_csi, 2},
     {"_sitsfeats_rcpparma_hello_world", (DL_FUNC) &_sitsfeats_rcpparma_hello_world, 0},
     {"_sitsfeats_rcpparma_outerproduct", (DL_FUNC) &_sitsfeats_rcpparma_outerproduct, 1},

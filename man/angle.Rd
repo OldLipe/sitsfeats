@@ -2,16 +2,32 @@
 % Please edit documentation in R/polar_metrics.R
 \name{angle}
 \alias{angle}
+\alias{angle.numeric}
+\alias{angle.matrix}
 \title{...}
 \usage{
-angle(timeseries)
+angle(type = "list")
+
+\method{angle}{numeric}(timeseries)
+
+\method{angle}{matrix}(timeseries)
 }
 \arguments{
+\item{type}{...}
+
 \item{timeseries}{...}
 }
 \value{
 ...
+
+...
+
+...
 }
 \description{
+Area of the closed shape
+
+The main angle of the closed shape created after transformation
+
 The main angle of the closed shape created after transformation
 }
