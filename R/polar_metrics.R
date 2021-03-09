@@ -206,7 +206,7 @@ polar_metrics <- function(timeseries, metrics = c()) {
             "area_q3",
             "area_q4",
             "polar_balance") %in% metrics)) {
-    area <- sitsfeat::area_season(timeseries)
+    area <- sitsfeats::area_season(timeseries)
     index_metrics <- which(metrics %in% c("area_q1",
                                           "area_q2",
                                           "area_q3",
@@ -214,11 +214,11 @@ polar_metrics <- function(timeseries, metrics = c()) {
                                           "polar_balance"))
     values_area <- sapply(metrics[index_metrics], function(metric) {
       switch(metric,
-             area_q1 = sitsfeat::area_q1(area),
-             area_q2 = sitsfeat::area_q2(area),
-             area_q3 = sitsfeat::area_q3(area),
-             area_q4 = sitsfeat::area_q4(area),
-             polar_balance = sitsfeat::polar_balance(area))
+             area_q1 = sitsfeats::area_q1(area),
+             area_q2 = sitsfeats::area_q2(area),
+             area_q3 = sitsfeats::area_q3(area),
+             area_q4 = sitsfeats::area_q4(area),
+             polar_balance = sitsfeats::polar_balance(area))
 
     })
   }
@@ -233,18 +233,18 @@ polar_metrics <- function(timeseries, metrics = c()) {
                                           "ecc_metric",
                                           "area_ts"))
 
-    polygon <- sitsfeat::create_polygon(timeseries)
+    polygon <- sitsfeats::create_polygon(timeseries)
     values_poli <- sapply(metrics[index_metrics], function(metric) {
       switch(metric,
-             csi = sitsfeat::csi(polygon),
-             gyration_radius = sitsfeat::gyration_radius(polygon),
-             ecc_metric = sitsfeat::ecc_metric(polygon),
-             area_ts = sitsfeat::area_ts(polygon))
+             csi = sitsfeats::csi(polygon),
+             gyration_radius = sitsfeats::gyration_radius(polygon),
+             ecc_metric = sitsfeats::ecc_metric(polygon),
+             area_ts = sitsfeats::area_ts(polygon))
 
     })
   }
   if (any(c("angle") %in% metrics)) {
-    values_angle <-  sitsfeat::angle(timeseries)
+    values_angle <-  sitsfeats::angle(timeseries)
     names(values_angle) <- "angle"
   }
 
