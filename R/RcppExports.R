@@ -17,6 +17,10 @@ mean_ts <- function(mtx) {
     .Call(`_sitsfeats_mean_ts`, mtx)
 }
 
+median_ts <- function(mtx) {
+    .Call(`_sitsfeats_median_ts`, mtx)
+}
+
 std_ts <- function(mtx) {
     .Call(`_sitsfeats_std_ts`, mtx)
 }
@@ -37,20 +41,8 @@ fslope_ts <- function(mtx) {
     .Call(`_sitsfeats_fslope_ts`, mtx)
 }
 
-abs_sum_ts <- function(mtx) {
-    .Call(`_sitsfeats_abs_sum_ts`, mtx)
-}
-
 amd_ts <- function(mtx) {
     .Call(`_sitsfeats_amd_ts`, mtx)
-}
-
-mse_ts <- function(mtx) {
-    .Call(`_sitsfeats_mse_ts`, mtx)
-}
-
-mse_ts_2 <- function(mtx) {
-    .Call(`_sitsfeats_mse_ts_2`, mtx)
 }
 
 fqr_ts <- function(mtx) {
@@ -67,10 +59,6 @@ sqr_ts <- function(mtx) {
 
 iqr_ts <- function(mtx) {
     .Call(`_sitsfeats_iqr_ts`, mtx)
-}
-
-row_wide_loop <- function(x) {
-    .Call(`_sitsfeats_row_wide_loop`, x)
 }
 
 calculate_vec <- function(timeseries) {
