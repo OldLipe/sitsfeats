@@ -49,6 +49,10 @@ mse_ts <- function(mtx) {
     .Call(`_sitsfeats_mse_ts`, mtx)
 }
 
+mse_ts_2 <- function(mtx) {
+    .Call(`_sitsfeats_mse_ts_2`, mtx)
+}
+
 fqr_ts <- function(mtx) {
     .Call(`_sitsfeats_fqr_ts`, mtx)
 }

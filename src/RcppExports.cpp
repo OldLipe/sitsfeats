@@ -138,6 +138,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mse_ts_2
+arma::rowvec mse_ts_2(arma::mat& mtx);
+RcppExport SEXP _sitsfeats_mse_ts_2(SEXP mtxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type mtx(mtxSEXP);
+    rcpp_result_gen = Rcpp::wrap(mse_ts_2(mtx));
+    return rcpp_result_gen;
+END_RCPP
+}
 // fqr_ts
 arma::vec fqr_ts(const arma::mat& mtx);
 RcppExport SEXP _sitsfeats_fqr_ts(SEXP mtxSEXP) {
@@ -353,6 +364,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_abs_sum_ts", (DL_FUNC) &_sitsfeats_abs_sum_ts, 1},
     {"_sitsfeats_amd_ts", (DL_FUNC) &_sitsfeats_amd_ts, 1},
     {"_sitsfeats_mse_ts", (DL_FUNC) &_sitsfeats_mse_ts, 1},
+    {"_sitsfeats_mse_ts_2", (DL_FUNC) &_sitsfeats_mse_ts_2, 1},
     {"_sitsfeats_fqr_ts", (DL_FUNC) &_sitsfeats_fqr_ts, 1},
     {"_sitsfeats_tqr_ts", (DL_FUNC) &_sitsfeats_tqr_ts, 1},
     {"_sitsfeats_sqr_ts", (DL_FUNC) &_sitsfeats_sqr_ts, 1},

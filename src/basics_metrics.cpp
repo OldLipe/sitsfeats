@@ -91,14 +91,6 @@ arma::vec amd_ts(const arma::mat& mtx) {
 }
 
 // [[Rcpp::export]]
-arma::vec mse_ts(const arma::mat& mtx) {
-
-  arma::mat metrics = mtx.t();
-
-  return arma::mean(arma::pow(arma::abs(arma::trans(arma::fft(metrics))), 2), 1);
-}
-
-// [[Rcpp::export]]
 arma::vec fqr_ts(const arma::mat& mtx) {
 
   return arma::quantile(mtx, P_025, 1);

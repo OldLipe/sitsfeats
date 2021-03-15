@@ -2,10 +2,9 @@
 % Please edit documentation in R/polar_metrics.R
 \name{area_ts.sfc_POLYGON}
 \alias{area_ts.sfc_POLYGON}
-\alias{area_ts.matrix}
 \title{...}
 \usage{
-\method{area_ts}{matrix}(polygon)
+\method{area_ts}{sfc_POLYGON}(polygon)
 }
 \arguments{
 \item{polygon}{...}

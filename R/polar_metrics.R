@@ -120,7 +120,7 @@ area_season <- function(timeseries) {
 
   # TODO: retornar a lista de polygons
 }
-################################################################################
+####  Heavy Metrics  ####
 
 #' @title ...
 #' @name polar_metrics
@@ -401,7 +401,7 @@ polar_balance.numeric <- function(timeseries) {
   return(std_numpy(unlist(areas_list)))
 }
 
-################################################################################
+####  Light metrics  ####
 # Metricas que não dependem de função repetitivas
 #' @title ...
 #' @name angle
@@ -445,11 +445,10 @@ angle.numeric <- function(timeseries) {
 #' @export
 angle.matrix <- function(timeseries) {
 
-  sitsfeats::calc_angle(timeseries)
+  calc_angle(timeseries)
 }
 
-################################################################################
-# Metricas que usam a função create_polygon
+#### Medium Metrics ####
 #' @title ...
 #' @name area_ts
 #'
@@ -510,7 +509,7 @@ area_ts.matrix <- function(timeseries) {
 #'
 #' @return ...
 #' @export
-area_ts.matrix <- function(polygon) {
+area_ts.sfc_POLYGON <- function(polygon) {
   return(sf::st_area(polygon))
 }
 #' @title ...
@@ -752,4 +751,21 @@ csi.numeric <- function(timeseries) {
   ls <- sf::st_cast(polygon, "LINESTRING")
 
   (sf::st_length(ls) ^ 2)/(4 * pi * sf::st_area(polygon))
+}
+
+#' @title ...
+#' @name csi.matrix
+#'
+#' @description This is a dimensionless quantitative measure of morphology
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+csi.matrix <- function(timeseries) {
+
+  polygon <- create_polygon_v2(timeseries)
+  ls <- sf::st_cast(polygon, "LINESTRING")
+
+  calc_csi(sf::st_length(ls), sf::st_area(polygon))
 }
