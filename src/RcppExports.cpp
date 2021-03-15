@@ -28,17 +28,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// sum_ts
-arma::vec sum_ts(const arma::mat& mtx);
-RcppExport SEXP _sitsfeats_sum_ts(SEXP mtxSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::mat& >::type mtx(mtxSEXP);
-    rcpp_result_gen = Rcpp::wrap(sum_ts(mtx));
-    return rcpp_result_gen;
-END_RCPP
-}
 // mean_ts
 arma::vec mean_ts(const arma::mat& mtx);
 RcppExport SEXP _sitsfeats_mean_ts(SEXP mtxSEXP) {
@@ -321,7 +310,6 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_max_ts", (DL_FUNC) &_sitsfeats_max_ts, 1},
     {"_sitsfeats_min_ts", (DL_FUNC) &_sitsfeats_min_ts, 1},
-    {"_sitsfeats_sum_ts", (DL_FUNC) &_sitsfeats_sum_ts, 1},
     {"_sitsfeats_mean_ts", (DL_FUNC) &_sitsfeats_mean_ts, 1},
     {"_sitsfeats_median_ts", (DL_FUNC) &_sitsfeats_median_ts, 1},
     {"_sitsfeats_std_ts", (DL_FUNC) &_sitsfeats_std_ts, 1},

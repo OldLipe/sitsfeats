@@ -21,12 +21,6 @@ arma::vec min_ts(const arma::mat& mtx) {
 }
 
 // [[Rcpp::export]]
-arma::vec sum_ts(const arma::mat& mtx) {
-
-  return arma::sum(mtx, 1);
-}
-
-// [[Rcpp::export]]
 arma::vec mean_ts(const arma::mat& mtx) {
 
   return arma::mean(mtx, 1);

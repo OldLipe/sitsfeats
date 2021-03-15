@@ -9,10 +9,6 @@ min_ts <- function(mtx) {
     .Call(`_sitsfeats_min_ts`, mtx)
 }
 
-sum_ts <- function(mtx) {
-    .Call(`_sitsfeats_sum_ts`, mtx)
-}
-
 mean_ts <- function(mtx) {
     .Call(`_sitsfeats_mean_ts`, mtx)
 }
