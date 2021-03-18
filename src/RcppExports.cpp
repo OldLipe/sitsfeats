@@ -50,6 +50,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sum_ts
+arma::vec sum_ts(const arma::mat& mtx);
+RcppExport SEXP _sitsfeats_sum_ts(SEXP mtxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type mtx(mtxSEXP);
+    rcpp_result_gen = Rcpp::wrap(sum_ts(mtx));
+    return rcpp_result_gen;
+END_RCPP
+}
 // std_ts
 arma::vec std_ts(const arma::mat& mtx);
 RcppExport SEXP _sitsfeats_std_ts(SEXP mtxSEXP) {
@@ -105,6 +116,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// abs_sum_ts
+arma::vec abs_sum_ts(const arma::mat& mtx);
+RcppExport SEXP _sitsfeats_abs_sum_ts(SEXP mtxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type mtx(mtxSEXP);
+    rcpp_result_gen = Rcpp::wrap(abs_sum_ts(mtx));
+    return rcpp_result_gen;
+END_RCPP
+}
 // amd_ts
 arma::vec amd_ts(const arma::mat& mtx);
 RcppExport SEXP _sitsfeats_amd_ts(SEXP mtxSEXP) {
@@ -113,6 +135,17 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type mtx(mtxSEXP);
     rcpp_result_gen = Rcpp::wrap(amd_ts(mtx));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mse_ts
+arma::vec mse_ts(const arma::mat& mtx);
+RcppExport SEXP _sitsfeats_mse_ts(SEXP mtxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type mtx(mtxSEXP);
+    rcpp_result_gen = Rcpp::wrap(mse_ts(mtx));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -312,12 +345,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_min_ts", (DL_FUNC) &_sitsfeats_min_ts, 1},
     {"_sitsfeats_mean_ts", (DL_FUNC) &_sitsfeats_mean_ts, 1},
     {"_sitsfeats_median_ts", (DL_FUNC) &_sitsfeats_median_ts, 1},
+    {"_sitsfeats_sum_ts", (DL_FUNC) &_sitsfeats_sum_ts, 1},
     {"_sitsfeats_std_ts", (DL_FUNC) &_sitsfeats_std_ts, 1},
     {"_sitsfeats_skew_ts", (DL_FUNC) &_sitsfeats_skew_ts, 1},
     {"_sitsfeats_kurt_ts", (DL_FUNC) &_sitsfeats_kurt_ts, 1},
     {"_sitsfeats_amplitude_ts", (DL_FUNC) &_sitsfeats_amplitude_ts, 1},
     {"_sitsfeats_fslope_ts", (DL_FUNC) &_sitsfeats_fslope_ts, 1},
+    {"_sitsfeats_abs_sum_ts", (DL_FUNC) &_sitsfeats_abs_sum_ts, 1},
     {"_sitsfeats_amd_ts", (DL_FUNC) &_sitsfeats_amd_ts, 1},
+    {"_sitsfeats_mse_ts", (DL_FUNC) &_sitsfeats_mse_ts, 1},
     {"_sitsfeats_fqr_ts", (DL_FUNC) &_sitsfeats_fqr_ts, 1},
     {"_sitsfeats_tqr_ts", (DL_FUNC) &_sitsfeats_tqr_ts, 1},
     {"_sitsfeats_sqr_ts", (DL_FUNC) &_sitsfeats_sqr_ts, 1},

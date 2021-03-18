@@ -33,6 +33,12 @@ arma::vec median_ts(const arma::mat& mtx) {
 }
 
 // [[Rcpp::export]]
+arma::vec sum_ts(const arma::mat& mtx) {
+
+  return arma::sum(mtx, 1);
+}
+
+// [[Rcpp::export]]
 arma::vec std_ts(const arma::mat& mtx) {
 
   return arma::stddev(mtx, 0, 1);
@@ -81,10 +87,25 @@ arma::vec fslope_ts(const arma::mat& mtx) {
   return arma::max(arma::abs(arma::diff(mtx, 1, 1)), 1);
 }
 
+
+// [[Rcpp::export]]
+arma::vec abs_sum_ts(const arma::mat& mtx) {
+
+  return arma::sum(arma::abs(mtx), 1);
+}
+
 // [[Rcpp::export]]
 arma::vec amd_ts(const arma::mat& mtx) {
 
   return arma::mean(arma::abs(arma::diff(mtx, 1, 1)), 1);
+}
+
+// [[Rcpp::export]]
+arma::vec mse_ts(const arma::mat& mtx) {
+
+  arma::mat metrics = mtx.t();
+
+  return arma::mean(arma::pow(arma::abs(arma::trans(arma::fft(metrics))), 2), 1);
 }
 
 // [[Rcpp::export]]
