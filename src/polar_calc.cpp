@@ -21,24 +21,17 @@ arma::mat calculate_vec(const arma::vec& timeseries) {
   }
   return pts;
 }
+
 // [[Rcpp::export]]
-arma::mat calculate_vec_v2(const arma::mat& timeseries) {
-
-
-  arma::mat pts(timeseries.n_rows, timeseries.n_cols, arma::fill::zeros);
-
-  //Rcpp::Rcout << timeseries.n_elem << std::endl;
-  for (arma::uword i = 0; i < timeseries.n_rows; i++) {
-    for (arma::uword c = 0; c < timeseries.n_cols; c++) {
-      //double a = timeseries[i] * cos((2 * arma::datum::pi * i) / timeseries.n_elem);
-      //double o = timeseries[i] * sin((2 * arma::datum::pi * i) / timeseries.n_elem);
-
-      pts(i,c) = timeseries(i,c) * cos((2 * arma::datum::pi * c) / timeseries.n_cols);;
-      pts(i,c) = timeseries(i,c) * sin((2 * arma::datum::pi * c) / timeseries.n_cols);;
-    }
+arma::vec reptest(arma::uword x, arma::uword time) {
+  //int n = y.size();
+  arma::vec myvector(time, arma::fill::zeros);
+  for (int i = 0; i < time; ++i) {
+    myvector(i) = x;
   }
-  return pts;
+  return myvector;
 }
+
 // [[Rcpp::export]]
 Rcpp::List calculate_vec_v3(arma::mat& timeseries) {
 
@@ -65,27 +58,80 @@ Rcpp::List calculate_vec_v3(arma::mat& timeseries) {
 }
 
 // [[Rcpp::export]]
+Rcpp::List calculate_vec_v3_id(arma::mat& timeseries) {
+
+  timeseries = arma::abs(timeseries);
+
+  arma::vec x(timeseries.n_cols + 1, arma::fill::zeros);
+  arma::vec y(timeseries.n_cols + 1, arma::fill::zeros);
+  Rcpp::List pts (timeseries.n_rows);
+
+  for (arma::uword i = 0; i < timeseries.n_rows; i++) {
+    for (arma::uword c = 0; c < timeseries.n_cols; c++) {
+
+      x(c) = timeseries(i,c) * cos((2 * arma::datum::pi * c) / timeseries.n_cols);
+      y(c) = timeseries(i,c) * sin((2 * arma::datum::pi * c) / timeseries.n_cols);
+    }
+
+    // add the first points into last position
+    x(timeseries.n_cols) = x(0);
+    y(timeseries.n_cols) = y(0);
+
+    pts[i] = arma::join_rows(x,y, reptest(i, timeseries.n_cols + 1));
+  }
+  return pts;
+}
+
+// // [[Rcpp::export]]
+// arma::mat calculate_vec_v4(arma::mat& timeseries) {
+//
+//   timeseries = arma::abs(timeseries);
+//
+//   arma::vec x(timeseries.n_cols + 1, arma::fill::zeros);
+//   arma::vec y(timeseries.n_cols + 1, arma::fill::zeros);
+//   arma::mat xy(timeseries.n_cols + 1, 3, arma::fill::zeros);
+//   arma::mat pts (timeseries.n_rows*timeseries.n_cols, 3, arma::fill::zeros);
+//
+//   for (arma::uword k = 0; k < (timeseries.n_rows*timeseries.n_cols) - timeseries.n_cols; k = k + timeseries.n_cols)
+//   for (arma::uword i = 0; i < timeseries.n_rows; i++) {
+//     for (arma::uword c = 0; c < timeseries.n_cols; c++) {
+//
+//       xy(c,0) = timeseries(i,c) * cos((2 * arma::datum::pi * c) / timeseries.n_cols);
+//       xy(c,1) = timeseries(i,c) * sin((2 * arma::datum::pi * c) / timeseries.n_cols);
+//       xy(c,2) = c;
+//
+//     }
+//
+//     pts.insert_rows(k, k + timeseries.n_cols, xy);
+//
+//     // add the first points into last position
+//     // xy(timeseries.n_cols, 0) = x(0,0);
+//     // xy(timeseries.n_cols,1) = y(0,1);
+//     // xy(timeseries.n_cols,2) = y(0,2);
+//
+//     //pts = arma::join_vert(pts, xy);
+//   }
+//   return pts;
+// }
+
+// [[Rcpp::export]]
 arma::vec calc_distance(const arma::mat& line, const arma::rowvec& pts_cent) {
-  //Rcpp::Rcout << line.col(0) << std::endl;
-  //Rcpp::Rcout << line.col(1) << std::endl;
-  return arma::sqrt(arma::square((line.col(0) - pts_cent.at(0))) +  arma::square((line.col(1) - pts_cent.at(1))));
+
+  return arma::sqrt(arma::square((line.col(0) - pts_cent.at(0))) + arma::square((line.col(1) - pts_cent.at(1))));
 }
 
 // [[Rcpp::export]]
-arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line) {
+arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line, const arma::uword size_col) {
 
   // vector to store values
   arma::vec pts_values(pts_cent.n_rows, arma::fill::zeros);
-  //arma::vec interval();
+  arma::uword c = 0;
+
   for (arma::uword i = 0; i < pts_cent.n_rows; i++) {
-    for (arma::uword c = 0; c < pts_line.n_rows; c = c + 24) {
-      //arma::mat line = pts_line.rows(c, c + 24).cols(0,1);
-      //Rcpp::Rcout << c << c + 25 << std::endl;
-      arma::mat line = pts_line.submat( c, 0, c + 24, 1 );
+      arma::mat line = pts_line.submat( c, 0, c + size_col, 1 );
       pts_values(i) = arma::mean(calc_distance(line, pts_cent.row(i)));
 
-      //c = c + 24;
-    }
+      c = c + size_col + 1;
   }
   return pts_values;
 }

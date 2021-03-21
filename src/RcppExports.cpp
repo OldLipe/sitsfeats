@@ -204,14 +204,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// calculate_vec_v2
-arma::mat calculate_vec_v2(const arma::mat& timeseries);
-RcppExport SEXP _sitsfeats_calculate_vec_v2(SEXP timeseriesSEXP) {
+// reptest
+arma::vec reptest(arma::uword x, arma::uword time);
+RcppExport SEXP _sitsfeats_reptest(SEXP xSEXP, SEXP timeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::mat& >::type timeseries(timeseriesSEXP);
-    rcpp_result_gen = Rcpp::wrap(calculate_vec_v2(timeseries));
+    Rcpp::traits::input_parameter< arma::uword >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::uword >::type time(timeSEXP);
+    rcpp_result_gen = Rcpp::wrap(reptest(x, time));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -223,6 +224,17 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type timeseries(timeseriesSEXP);
     rcpp_result_gen = Rcpp::wrap(calculate_vec_v3(timeseries));
+    return rcpp_result_gen;
+END_RCPP
+}
+// calculate_vec_v3_id
+Rcpp::List calculate_vec_v3_id(arma::mat& timeseries);
+RcppExport SEXP _sitsfeats_calculate_vec_v3_id(SEXP timeseriesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type timeseries(timeseriesSEXP);
+    rcpp_result_gen = Rcpp::wrap(calculate_vec_v3_id(timeseries));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -239,14 +251,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // gr_calc
-arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line);
-RcppExport SEXP _sitsfeats_gr_calc(SEXP pts_centSEXP, SEXP pts_lineSEXP) {
+arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line, const arma::uword size_col);
+RcppExport SEXP _sitsfeats_gr_calc(SEXP pts_centSEXP, SEXP pts_lineSEXP, SEXP size_colSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type pts_cent(pts_centSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type pts_line(pts_lineSEXP);
-    rcpp_result_gen = Rcpp::wrap(gr_calc(pts_cent, pts_line));
+    Rcpp::traits::input_parameter< const arma::uword >::type size_col(size_colSEXP);
+    rcpp_result_gen = Rcpp::wrap(gr_calc(pts_cent, pts_line, size_col));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -359,10 +372,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_sqr_ts", (DL_FUNC) &_sitsfeats_sqr_ts, 1},
     {"_sitsfeats_iqr_ts", (DL_FUNC) &_sitsfeats_iqr_ts, 1},
     {"_sitsfeats_calculate_vec", (DL_FUNC) &_sitsfeats_calculate_vec, 1},
-    {"_sitsfeats_calculate_vec_v2", (DL_FUNC) &_sitsfeats_calculate_vec_v2, 1},
+    {"_sitsfeats_reptest", (DL_FUNC) &_sitsfeats_reptest, 2},
     {"_sitsfeats_calculate_vec_v3", (DL_FUNC) &_sitsfeats_calculate_vec_v3, 1},
+    {"_sitsfeats_calculate_vec_v3_id", (DL_FUNC) &_sitsfeats_calculate_vec_v3_id, 1},
     {"_sitsfeats_calc_distance", (DL_FUNC) &_sitsfeats_calc_distance, 2},
-    {"_sitsfeats_gr_calc", (DL_FUNC) &_sitsfeats_gr_calc, 2},
+    {"_sitsfeats_gr_calc", (DL_FUNC) &_sitsfeats_gr_calc, 3},
     {"_sitsfeats_teste_linspace", (DL_FUNC) &_sitsfeats_teste_linspace, 2},
     {"_sitsfeats_linspace_vec", (DL_FUNC) &_sitsfeats_linspace_vec, 1},
     {"_sitsfeats_calc_angle", (DL_FUNC) &_sitsfeats_calc_angle, 1},

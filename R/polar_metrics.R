@@ -33,6 +33,23 @@ create_polygon_v2 <- function(timeseries) {
   # return only polygon object, not geometry collection
   return(sf::st_as_sfc(poly_list))
 }
+
+#' @title ...
+#' @name create_polygon_v3
+#'
+#' @param timeseries ...
+#'
+#' @return a polygon object from \code{sf} class
+create_polygon_v3 <- function(timeseries) {
+
+  # TODO: comentar
+  pts_values <- calculate_vec_v3_id(timeseries)
+
+  poly_list <- do.call(rbind, pts_values)
+
+  # return only polygon object, not geometry collection
+  return(sfheaders::sf_polygon( poly_list, polygon_id = 3))
+}
 #' @title ...
 #' @name calc_bbox
 #'
@@ -497,7 +514,7 @@ area_ts.numeric <- function(timeseries) {
 #' @return ...
 #' @export
 area_ts.matrix <- function(timeseries) {
-  polygon <- create_polygon_v2(timeseries)
+  polygon <- create_polygon_v3(timeseries)
   return(sf::st_area(polygon))
 }
 #' @title ...
@@ -694,6 +711,31 @@ gyration_radius.numeric <- function(timeseries) {
   })
   return(mean(dist_values))
 }
+
+#' @title ...
+#' @name gyration_radius.matrix
+#'
+#' @description Equals the average distance between each point inside
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+gyration_radius.matrix <- function(timeseries) {
+  #browser()
+
+  # get number of column
+  size_col <- ncol(timeseries)
+
+  polygon <- create_polygon_v3(timeseries)
+
+  pts_cent <- sf::st_coordinates(sf::st_centroid(polygon))
+  pts_line <- sf::st_coordinates(sfheaders::sf_cast(polygon, "LINESTRING"))[,1:2]
+
+  gr_calc(pts_cent, pts_line, size_col)
+  #return(mean(dist_values))
+}
+
 #' @title ...
 #' @name csi
 #'
@@ -748,11 +790,10 @@ csi.sfc_POLYGON <- function(polygon) {
 csi.numeric <- function(timeseries) {
 
   polygon <- create_polygon(timeseries)
-  ls <- sf::st_cast(polygon, "LINESTRING")
+  ls <- sfheaders::st_cast(polygon, "LINESTRING")
 
   (sf::st_length(ls) ^ 2)/(4 * pi * sf::st_area(polygon))
 }
-
 #' @title ...
 #' @name csi.matrix
 #'
@@ -764,8 +805,8 @@ csi.numeric <- function(timeseries) {
 #' @export
 csi.matrix <- function(timeseries) {
 
-  polygon <- create_polygon_v2(timeseries)
-  ls <- sf::st_cast(polygon, "LINESTRING")
+  polygon <- create_polygon_v3(timeseries)
+  ls <- sfheaders::sf_cast(polygon, "LINESTRING")
 
   calc_csi(sf::st_length(ls), sf::st_area(polygon))
 }

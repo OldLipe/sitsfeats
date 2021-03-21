@@ -73,20 +73,24 @@ calculate_vec <- function(timeseries) {
     .Call(`_sitsfeats_calculate_vec`, timeseries)
 }
 
-calculate_vec_v2 <- function(timeseries) {
-    .Call(`_sitsfeats_calculate_vec_v2`, timeseries)
+reptest <- function(x, time) {
+    .Call(`_sitsfeats_reptest`, x, time)
 }
 
 calculate_vec_v3 <- function(timeseries) {
     .Call(`_sitsfeats_calculate_vec_v3`, timeseries)
 }
 
+calculate_vec_v3_id <- function(timeseries) {
+    .Call(`_sitsfeats_calculate_vec_v3_id`, timeseries)
+}
+
 calc_distance <- function(line, pts_cent) {
     .Call(`_sitsfeats_calc_distance`, line, pts_cent)
 }
 
-gr_calc <- function(pts_cent, pts_line) {
-    .Call(`_sitsfeats_gr_calc`, pts_cent, pts_line)
+gr_calc <- function(pts_cent, pts_line, size_col) {
+    .Call(`_sitsfeats_gr_calc`, pts_cent, pts_line, size_col)
 }
 
 teste_linspace <- function(r, len) {
