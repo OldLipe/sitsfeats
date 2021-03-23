@@ -73,6 +73,15 @@ calculate_vec <- function(timeseries) {
     .Call(`_sitsfeats_calculate_vec`, timeseries)
 }
 
+#' @title Accessing R's sd function from Rcpp
+chn <- function(x) {
+    .Call(`_sitsfeats_chn`, x)
+}
+
+mbr <- function(timeseries) {
+    .Call(`_sitsfeats_mbr`, timeseries)
+}
+
 reptest <- function(x, time) {
     .Call(`_sitsfeats_reptest`, x, time)
 }
@@ -107,21 +116,5 @@ calc_angle <- function(timeseries) {
 
 calc_csi <- function(line_length, poly_area) {
     .Call(`_sitsfeats_calc_csi`, line_length, poly_area)
-}
-
-rcpparma_hello_world <- function() {
-    .Call(`_sitsfeats_rcpparma_hello_world`)
-}
-
-rcpparma_outerproduct <- function(x) {
-    .Call(`_sitsfeats_rcpparma_outerproduct`, x)
-}
-
-rcpparma_innerproduct <- function(x) {
-    .Call(`_sitsfeats_rcpparma_innerproduct`, x)
-}
-
-rcpparma_bothproducts <- function(x) {
-    .Call(`_sitsfeats_rcpparma_bothproducts`, x)
 }
 

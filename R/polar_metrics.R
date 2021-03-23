@@ -137,6 +137,33 @@ area_season <- function(timeseries) {
 
   # TODO: retornar a lista de polygons
 }
+
+#' @title ...
+#' @name area_season
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+area_season_mat <- function(timeseries) {
+
+  polygon <- create_polygon_v3(timeseries)
+
+  pts_poly <- sf::st_coordinates(polygon)
+  polygons <- get_seasons(pts_poly[,1], pts_poly[,2])
+
+
+  quaterPolyTopLeft = sf::st_intersection(polygons[["polyTopLeft"]], polygon)
+  quaterPolyTopRight = sf::st_intersection(polygons[["polyTopRight"]], polygon)
+  quaterPolyBottomLeft = sf::st_intersection(polygons[["polyBottomLeft"]], polygon)
+  quaterPolyBottomRight = sf::st_intersection(polygons[["polyBottomRight"]], polygon)
+
+
+  list(quaterPolyTopLeft, quaterPolyTopRight,
+       quaterPolyBottomLeft, quaterPolyBottomRight)
+
+  # TODO: retornar a lista de polygons
+}
+
 ####  Heavy Metrics  ####
 
 #' @title ...
@@ -253,6 +280,19 @@ area_q1.list <- function(list_of_polygons) {
 #' @export
 area_q1.numeric <- function(timeseries) {
   areas <- area_season(timeseries)
+  return(sf::st_area(areas[[1]]))
+}
+#' @title ...
+#' @name area_q1.matrix
+#'
+#' @description Area of the closed shape over the first quadrant
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+area_q1.matrix <- function(timeseries) {
+  areas <- area_season_mat(timeseries)
   return(sf::st_area(areas[[1]]))
 }
 #' @title ...
@@ -587,50 +627,60 @@ ecc_metric.numeric <- function(timeseries) {
 
 }
 #' @title ...
+#' @name ecc_metric.matrix
+#'
+#' @description Return values close to 0 if the shape is a circle and 1
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+ecc_metric.matrix <- function(timeseries) {
+
+  polygon <- create_polygon_v3(timeseries)
+
+  pts_mbr <- MBR(sf::st_coordinates(polygon)[,1:2])
+
+  bbox_pts <- sf::st_bbox(pts_mbr)
+
+  axis1 = bbox_pts[["xmax"]] - bbox_pts[["xmin"]]
+  axis2 = bbox_pts[["ymax"]] - bbox_pts[["ymin"]]
+  stats = c(axis1, axis2)
+
+  return(min(stats) / max(stats))
+
+}
+
+#' @title ...
 #' @name MBR
 #'
-#' @note é necessária a instação do pacote grDevices para o método chull
+#' @note é necessária a instalação do pacote grDevices para o método chull
 #'
 #' @param p ...
 #'
 #' @return ...
 MBR <- function(p) {
   # Analyze the convex hull edges
-  browser(0)
-  a <- grDevices::chull(p)                        # Indexes of extremal points
-  a <- c(a, a[1])                                 # Close the loop
-  e <- p[a[-1],] - p[a[-length(a)], ]             # Edge directions
-  norms <- sqrt(rowSums(e^2))                     # Edge lengths
-  v <- e / norms                                  # Unit edge directions
-  w <- cbind(-v[,2], v[,1])                       # Normal directions to the edges
+  #browser(0)
+  a <- grDevices::chull(p)              # Indexes of extremal points
+  a <- c(a, a[1])                       # Close the loop
+  e <- p[a[-1],] - p[a[-length(a)], ]   # Edge directions
+  norms <- sqrt(rowSums(e^2))           # Edge lengths
+  v <- e / norms                        # Unit edge directions
+  w <- cbind(-v[,2], v[,1])             # Normal directions to the edges
 
   # Find the MBR
-  vertices <- p[a, ]                              # Convex hull vertices
-  x <- apply(vertices %*% t(v), 2, range)         # Extremes along edges
-  y <- apply(vertices %*% t(w), 2, range)         # Extremes normal to edges
-  areas <- (y[1,]-y[2,])*(x[1,]-x[2,])            # Areas
-  k <- which.min(areas)                           # Index of the best edge (smallest area)
+  vertices <- p[a, ]                      # Convex hull vertices
+  x <- apply(vertices %*% t(v), 2, range) # Extremes along edges
+  y <- apply(vertices %*% t(w), 2, range) # Extremes normal to edges
+  areas <- (y[1,]-y[2,])*(x[1,]-x[2,])    # Areas
+  k <- which.min(areas)
 
   # Form a rectangle from the extremes of the best edge
   pts <- cbind(x[c(1,2,2,1,1),k], y[c(1,1,2,2,1),k]) %*% rbind(v[k,], w[k,])
 
   sf::st_polygon(list(pts))
 }
-# ecc_metric.sfc_POLYGON <- function(polygon) {
-#
-#   polygon <- create_polygon(timeseries)
-#
-#   pts_mbr <- MBR(sf::st_coordinates(polygon)[,1:2])
-#
-#   bbox_pts <- sf::st_bbox(pts_mbr)
-#
-#   axis1 = bbox_pts[["xmax"]] - bbox_pts[["xmin"]]
-#   axis2 = bbox_pts[["ymax"]] - bbox_pts[["ymin"]]
-#   stats = c(axis1, axis2)
-#
-#   return(min(stats) / max(stats))
-#
-# }
 #' @title ...
 #' @name gyration_radius
 #'
@@ -722,7 +772,6 @@ gyration_radius.numeric <- function(timeseries) {
 #' @return ...
 #' @export
 gyration_radius.matrix <- function(timeseries) {
-  #browser()
 
   # get number of column
   size_col <- ncol(timeseries)
@@ -732,8 +781,7 @@ gyration_radius.matrix <- function(timeseries) {
   pts_cent <- sf::st_coordinates(sf::st_centroid(polygon))
   pts_line <- sf::st_coordinates(sfheaders::sf_cast(polygon, "LINESTRING"))[,1:2]
 
-  gr_calc(pts_cent, pts_line, size_col)
-  #return(mean(dist_values))
+  return(mean(gr_calc(pts_cent, pts_line, size_col)))
 }
 
 #' @title ...

@@ -23,6 +23,53 @@ arma::mat calculate_vec(const arma::vec& timeseries) {
 }
 
 // [[Rcpp::export]]
+Rcpp::NumericMatrix chn(const Rcpp::NumericMatrix& x){
+
+  // Obtain environment containing function
+  Rcpp::Environment geometry("package:geometry");
+
+  // Make function callable from C++
+  Rcpp::Function chn = geometry["convhulln"];
+
+  // Call the function and receive its list output
+  Rcpp::NumericMatrix res = chn(x); // example of additional param
+
+  // Return test object in list structure
+  return res;
+}
+
+// [[Rcpp::export]]
+arma::rowvec calc_bbox_fast(const arma::mat& pts) {
+  double minx = -arma::max(arma::abs(pts.col(0)));
+  double miny = -arma::max(arma::abs(pts.col(1)));
+
+  double maxx = arma::max(arma::abs(pts.col(0)));
+  double maxy = arma::max(arma::abs(pts.col(1)));
+
+  return(arma::rowvec({minx, miny, maxx, maxy}));
+}
+
+// [[Rcpp::export]]
+arma::mat get_seasons_fast(const arma::mat& pts, const arma::uword colsize) {
+
+  // get original number of matrix rows
+  const double nrows_origin = pts.n_rows/(colsize + 1);
+  arma::mat pts_bbox(nrows_origin, 4, arma::fill::zeros);
+
+  arma::uword c = 0;
+  for (arma::uword i = 0; i < nrows_origin; i++) {
+
+    arma::mat line = pts.submat( c, 0, c + colsize, 1 );
+    pts_bbox.row(i) = calc_bbox_fast(line);
+
+    c = c + colsize;
+  }
+
+  return pts_bbox;
+}
+
+
+// [[Rcpp::export]]
 arma::vec reptest(arma::uword x, arma::uword time) {
   //int n = y.size();
   arma::vec myvector(time, arma::fill::zeros);
