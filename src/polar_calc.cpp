@@ -25,6 +25,8 @@ arma::mat calculate_vec(const arma::vec& timeseries) {
 // [[Rcpp::export]]
 Rcpp::NumericMatrix chn(const Rcpp::NumericMatrix& x){
 
+  // problema dessa soluçao é que ela é lenta
+
   // Obtain environment containing function
   Rcpp::Environment geometry("package:geometry");
 
@@ -68,6 +70,81 @@ arma::mat get_seasons_fast(const arma::mat& pts, const arma::uword colsize) {
   return pts_bbox;
 }
 
+// [[Rcpp::export]]
+arma::mat polytopleft(const arma::mat bbox_pts){
+
+  arma::mat pts_ptl(bbox_pts.n_rows*5, 3, arma::fill::zeros);
+
+  arma::uword c = 0;
+  for (arma::uword i = 0; i < bbox_pts.n_rows; i++) {
+
+    pts_ptl.row(c + 0) = {bbox_pts(i,0), bbox_pts(i,3), (double) i}; // coord0
+    pts_ptl.row(c + 1) = {bbox_pts(i,0), 0, (double) i};             // coord3
+    pts_ptl.row(c + 2) = {0, 0, (double) i};                         // coord4
+    pts_ptl.row(c + 3) = {0, bbox_pts(i,3), (double) i};             // coord1
+    pts_ptl.row(c + 4) = {bbox_pts(i,0), bbox_pts(i,3), (double) i}; // coord0
+
+    c = c + 5;
+  }
+  return pts_ptl;
+}
+
+// [[Rcpp::export]]
+arma::mat polytopright(const arma::mat bbox_pts){
+
+  arma::mat pts_ptr(bbox_pts.n_rows*5, 3, arma::fill::zeros);
+
+  arma::uword c = 0;
+  for (arma::uword i = 0; i < bbox_pts.n_rows; i++) {
+
+    pts_ptr.row(c + 0) = {0, bbox_pts(i,3), (double) i};             // coord1
+    pts_ptr.row(c + 1) = {bbox_pts(i,2), bbox_pts(i,3), (double) i}; // coord2
+    pts_ptr.row(c + 2) = {bbox_pts(i,2), 0, (double) i};             // coord5
+    pts_ptr.row(c + 3) = {0, 0, (double) i};                         // coord4
+    pts_ptr.row(c + 4) = {0, bbox_pts(i,3), (double) i};             // coord1
+
+    c = c + 5;
+  }
+  return pts_ptr;
+}
+
+// [[Rcpp::export]]
+arma::mat polybottomleft(const arma::mat bbox_pts){
+
+  arma::mat pts_pbl(bbox_pts.n_rows*5, 3, arma::fill::zeros);
+
+  arma::uword c = 0;
+  for (arma::uword i = 0; i < bbox_pts.n_rows; i++) {
+
+    pts_pbl.row(c + 0) = {bbox_pts(i,0), 0, (double) i};             // coord3
+    pts_pbl.row(c + 1) = {0, 0, (double) i};                         // coord4
+    pts_pbl.row(c + 2) = {0, bbox_pts(i,1), (double) i};             // coord7
+    pts_pbl.row(c + 3) = {bbox_pts(i,0), bbox_pts(i,1), (double) i}; // coord6
+    pts_pbl.row(c + 4) = {bbox_pts(i,0), 0, (double) i};             // coord3
+
+    c = c + 5;
+  }
+  return pts_pbl;
+}
+
+// [[Rcpp::export]]
+arma::mat polybottomright(const arma::mat bbox_pts){
+
+  arma::mat pts_pbr(bbox_pts.n_rows*5, 3, arma::fill::zeros);
+
+  arma::uword c = 0;
+  for (arma::uword i = 0; i < bbox_pts.n_rows; i++) {
+
+    pts_pbr.row(c + 0) = {0, 0, (double) i};                         // coord4
+    pts_pbr.row(c + 1) = {bbox_pts(i,2), 0, (double) i};             // coord5
+    pts_pbr.row(c + 2) = {bbox_pts(i,2), bbox_pts(i,1), (double) i}; // coord8
+    pts_pbr.row(c + 3) = {0, bbox_pts(i,1), (double) i};             // coord7
+    pts_pbr.row(c + 4) = {0, 0, (double) i};                         // coord4
+
+    c = c + 5;
+  }
+  return pts_pbr;
+}
 
 // [[Rcpp::export]]
 arma::vec reptest(arma::uword x, arma::uword time) {

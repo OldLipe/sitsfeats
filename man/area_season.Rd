@@ -2,16 +2,23 @@
 % Please edit documentation in R/polar_metrics.R
 \name{area_season}
 \alias{area_season}
+\alias{area_season_mat}
 \title{...}
 \usage{
 area_season(timeseries)
+
+area_season_mat(timeseries)
 }
 \arguments{
 \item{timeseries}{...}
 }
 \value{
 ...
+
+...
 }
 \description{
+...
+
 ...
 }

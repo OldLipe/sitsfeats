@@ -204,6 +204,84 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// chn
+Rcpp::NumericMatrix chn(const Rcpp::NumericMatrix& x);
+RcppExport SEXP _sitsfeats_chn(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::NumericMatrix& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(chn(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// calc_bbox_fast
+arma::rowvec calc_bbox_fast(const arma::mat& pts);
+RcppExport SEXP _sitsfeats_calc_bbox_fast(SEXP ptsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type pts(ptsSEXP);
+    rcpp_result_gen = Rcpp::wrap(calc_bbox_fast(pts));
+    return rcpp_result_gen;
+END_RCPP
+}
+// get_seasons_fast
+arma::mat get_seasons_fast(const arma::mat& pts, const arma::uword colsize);
+RcppExport SEXP _sitsfeats_get_seasons_fast(SEXP ptsSEXP, SEXP colsizeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type pts(ptsSEXP);
+    Rcpp::traits::input_parameter< const arma::uword >::type colsize(colsizeSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_seasons_fast(pts, colsize));
+    return rcpp_result_gen;
+END_RCPP
+}
+// polytopleft
+arma::mat polytopleft(const arma::mat bbox_pts);
+RcppExport SEXP _sitsfeats_polytopleft(SEXP bbox_ptsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat >::type bbox_pts(bbox_ptsSEXP);
+    rcpp_result_gen = Rcpp::wrap(polytopleft(bbox_pts));
+    return rcpp_result_gen;
+END_RCPP
+}
+// polytopright
+arma::mat polytopright(const arma::mat bbox_pts);
+RcppExport SEXP _sitsfeats_polytopright(SEXP bbox_ptsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat >::type bbox_pts(bbox_ptsSEXP);
+    rcpp_result_gen = Rcpp::wrap(polytopright(bbox_pts));
+    return rcpp_result_gen;
+END_RCPP
+}
+// polybottomleft
+arma::mat polybottomleft(const arma::mat bbox_pts);
+RcppExport SEXP _sitsfeats_polybottomleft(SEXP bbox_ptsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat >::type bbox_pts(bbox_ptsSEXP);
+    rcpp_result_gen = Rcpp::wrap(polybottomleft(bbox_pts));
+    return rcpp_result_gen;
+END_RCPP
+}
+// polybottomright
+arma::mat polybottomright(const arma::mat bbox_pts);
+RcppExport SEXP _sitsfeats_polybottomright(SEXP bbox_ptsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat >::type bbox_pts(bbox_ptsSEXP);
+    rcpp_result_gen = Rcpp::wrap(polybottomright(bbox_pts));
+    return rcpp_result_gen;
+END_RCPP
+}
 // reptest
 arma::vec reptest(arma::uword x, arma::uword time);
 RcppExport SEXP _sitsfeats_reptest(SEXP xSEXP, SEXP timeSEXP) {
@@ -309,46 +387,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_hello_world
-arma::mat rcpparma_hello_world();
-RcppExport SEXP _sitsfeats_rcpparma_hello_world() {
+// mod
+arma::uword mod(arma::uword a, arma::uword n);
+RcppExport SEXP _sitsfeats_mod(SEXP aSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpparma_hello_world());
+    Rcpp::traits::input_parameter< arma::uword >::type a(aSEXP);
+    Rcpp::traits::input_parameter< arma::uword >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(mod(a, n));
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_outerproduct
-arma::mat rcpparma_outerproduct(const arma::colvec& x);
-RcppExport SEXP _sitsfeats_rcpparma_outerproduct(SEXP xSEXP) {
+// sutherland
+arma::mat sutherland(const arma::mat& subjectPoly, const arma::mat& clipPoly);
+RcppExport SEXP _sitsfeats_sutherland(SEXP subjectPolySEXP, SEXP clipPolySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_outerproduct(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_innerproduct
-double rcpparma_innerproduct(const arma::colvec& x);
-RcppExport SEXP _sitsfeats_rcpparma_innerproduct(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_innerproduct(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_bothproducts
-Rcpp::List rcpparma_bothproducts(const arma::colvec& x);
-RcppExport SEXP _sitsfeats_rcpparma_bothproducts(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_bothproducts(x));
+    Rcpp::traits::input_parameter< const arma::mat& >::type subjectPoly(subjectPolySEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type clipPoly(clipPolySEXP);
+    rcpp_result_gen = Rcpp::wrap(sutherland(subjectPoly, clipPoly));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -372,6 +431,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_sqr_ts", (DL_FUNC) &_sitsfeats_sqr_ts, 1},
     {"_sitsfeats_iqr_ts", (DL_FUNC) &_sitsfeats_iqr_ts, 1},
     {"_sitsfeats_calculate_vec", (DL_FUNC) &_sitsfeats_calculate_vec, 1},
+    {"_sitsfeats_chn", (DL_FUNC) &_sitsfeats_chn, 1},
+    {"_sitsfeats_calc_bbox_fast", (DL_FUNC) &_sitsfeats_calc_bbox_fast, 1},
+    {"_sitsfeats_get_seasons_fast", (DL_FUNC) &_sitsfeats_get_seasons_fast, 2},
+    {"_sitsfeats_polytopleft", (DL_FUNC) &_sitsfeats_polytopleft, 1},
+    {"_sitsfeats_polytopright", (DL_FUNC) &_sitsfeats_polytopright, 1},
+    {"_sitsfeats_polybottomleft", (DL_FUNC) &_sitsfeats_polybottomleft, 1},
+    {"_sitsfeats_polybottomright", (DL_FUNC) &_sitsfeats_polybottomright, 1},
     {"_sitsfeats_reptest", (DL_FUNC) &_sitsfeats_reptest, 2},
     {"_sitsfeats_calculate_vec_v3", (DL_FUNC) &_sitsfeats_calculate_vec_v3, 1},
     {"_sitsfeats_calculate_vec_v3_id", (DL_FUNC) &_sitsfeats_calculate_vec_v3_id, 1},
@@ -381,10 +447,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_linspace_vec", (DL_FUNC) &_sitsfeats_linspace_vec, 1},
     {"_sitsfeats_calc_angle", (DL_FUNC) &_sitsfeats_calc_angle, 1},
     {"_sitsfeats_calc_csi", (DL_FUNC) &_sitsfeats_calc_csi, 2},
-    {"_sitsfeats_rcpparma_hello_world", (DL_FUNC) &_sitsfeats_rcpparma_hello_world, 0},
-    {"_sitsfeats_rcpparma_outerproduct", (DL_FUNC) &_sitsfeats_rcpparma_outerproduct, 1},
-    {"_sitsfeats_rcpparma_innerproduct", (DL_FUNC) &_sitsfeats_rcpparma_innerproduct, 1},
-    {"_sitsfeats_rcpparma_bothproducts", (DL_FUNC) &_sitsfeats_rcpparma_bothproducts, 1},
+    {"_sitsfeats_mod", (DL_FUNC) &_sitsfeats_mod, 2},
+    {"_sitsfeats_sutherland", (DL_FUNC) &_sitsfeats_sutherland, 2},
     {NULL, NULL, 0}
 };
 

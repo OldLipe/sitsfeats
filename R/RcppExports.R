@@ -73,13 +73,32 @@ calculate_vec <- function(timeseries) {
     .Call(`_sitsfeats_calculate_vec`, timeseries)
 }
 
-#' @title Accessing R's sd function from Rcpp
 chn <- function(x) {
     .Call(`_sitsfeats_chn`, x)
 }
 
-mbr <- function(timeseries) {
-    .Call(`_sitsfeats_mbr`, timeseries)
+calc_bbox_fast <- function(pts) {
+    .Call(`_sitsfeats_calc_bbox_fast`, pts)
+}
+
+get_seasons_fast <- function(pts, colsize) {
+    .Call(`_sitsfeats_get_seasons_fast`, pts, colsize)
+}
+
+polytopleft <- function(bbox_pts) {
+    .Call(`_sitsfeats_polytopleft`, bbox_pts)
+}
+
+polytopright <- function(bbox_pts) {
+    .Call(`_sitsfeats_polytopright`, bbox_pts)
+}
+
+polybottomleft <- function(bbox_pts) {
+    .Call(`_sitsfeats_polybottomleft`, bbox_pts)
+}
+
+polybottomright <- function(bbox_pts) {
+    .Call(`_sitsfeats_polybottomright`, bbox_pts)
 }
 
 reptest <- function(x, time) {
@@ -116,5 +135,13 @@ calc_angle <- function(timeseries) {
 
 calc_csi <- function(line_length, poly_area) {
     .Call(`_sitsfeats_calc_csi`, line_length, poly_area)
+}
+
+mod <- function(a, n) {
+    .Call(`_sitsfeats_mod`, a, n)
+}
+
+sutherland <- function(subjectPoly, clipPoly) {
+    .Call(`_sitsfeats_sutherland`, subjectPoly, clipPoly)
 }
 
