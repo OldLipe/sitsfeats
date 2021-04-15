@@ -67,7 +67,7 @@ arma::vec kurt_ts(const arma::mat& mtx) {
   // kurtosis based on pearson’s definition is used (normal ==> 3.0)
 
   const int n = mtx.n_cols;
-  const double expS = 1.5;
+  //const double expS = 1.5;
 
   arma::vec m4 = arma::sum(arma::pow(mtx.each_col()- arma::mean(mtx, 1), 4), 1);
   arma::vec m2 = arma::pow(arma::sum(arma::pow(mtx.each_col()- arma::mean(mtx, 1), 2), 1), 2);
