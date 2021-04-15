@@ -398,6 +398,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mod
+arma::uword mod(arma::uword a, arma::uword n);
+RcppExport SEXP _sitsfeats_mod(SEXP aSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::uword >::type a(aSEXP);
+    Rcpp::traits::input_parameter< arma::uword >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(mod(a, n));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sutherland
+arma::mat sutherland(const arma::mat& subjectPoly, const arma::mat& clipPoly);
+RcppExport SEXP _sitsfeats_sutherland(SEXP subjectPolySEXP, SEXP clipPolySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type subjectPoly(subjectPolySEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type clipPoly(clipPolySEXP);
+    rcpp_result_gen = Rcpp::wrap(sutherland(subjectPoly, clipPoly));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_max_ts", (DL_FUNC) &_sitsfeats_max_ts, 1},
@@ -435,6 +459,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_sitsfeats_linspace_vec", (DL_FUNC) &_sitsfeats_linspace_vec, 1},
     {"_sitsfeats_calc_angle", (DL_FUNC) &_sitsfeats_calc_angle, 1},
     {"_sitsfeats_calc_csi", (DL_FUNC) &_sitsfeats_calc_csi, 2},
+    {"_sitsfeats_mod", (DL_FUNC) &_sitsfeats_mod, 2},
+    {"_sitsfeats_sutherland", (DL_FUNC) &_sitsfeats_sutherland, 2},
     {NULL, NULL, 0}
 };
 
