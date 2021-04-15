@@ -1,4 +1,4 @@
-#' @title ...
+#' @title Create a po
 #' @name create_polygon
 #'
 #' @param timeseries ...
@@ -121,32 +121,6 @@ get_seasons <- function(x,y) {
 area_season <- function(timeseries) {
 
   polygon <- create_polygon(timeseries)
-
-  pts_poly <- sf::st_coordinates(polygon)
-  polygons <- get_seasons(pts_poly[,1], pts_poly[,2])
-
-
-  quaterPolyTopLeft = sf::st_intersection(polygons[["polyTopLeft"]], polygon)
-  quaterPolyTopRight = sf::st_intersection(polygons[["polyTopRight"]], polygon)
-  quaterPolyBottomLeft = sf::st_intersection(polygons[["polyBottomLeft"]], polygon)
-  quaterPolyBottomRight = sf::st_intersection(polygons[["polyBottomRight"]], polygon)
-
-
-  list(quaterPolyTopLeft, quaterPolyTopRight,
-       quaterPolyBottomLeft, quaterPolyBottomRight)
-
-  # TODO: retornar a lista de polygons
-}
-
-#' @title ...
-#' @name area_season
-#'
-#' @param timeseries ...
-#'
-#' @return ...
-area_season_mat <- function(timeseries) {
-
-  polygon <- create_polygon_v3(timeseries)
 
   pts_poly <- sf::st_coordinates(polygon)
   polygons <- get_seasons(pts_poly[,1], pts_poly[,2])
@@ -292,8 +266,23 @@ area_q1.numeric <- function(timeseries) {
 #' @return ...
 #' @export
 area_q1.matrix <- function(timeseries) {
-  areas <- area_season_mat(timeseries)
-  return(sf::st_area(areas[[1]]))
+
+  # create a sf polygons object
+  polygon <- create_polygon_v3(timeseries)
+
+  # get coordinates from points
+  pts_poly <- sf::st_coordinates(polygon)
+
+  # get time series instances
+  instances_time <- dim(timeseries)[[2]]
+
+  pts_bbox <- get_seasons_fast(pts_poly, instances_time)
+
+  # creates a polygon in top left quadrant
+  poly_topleft <- sfheaders::sf_polygon(polytopleft(pts_bbox),
+                                        polygon_id = 3)
+
+  return(list(sf::st_area(sf::st_crop(polygon, poly_topleft)), sf::st_crop(polygon, poly_topleft)))
 }
 #' @title ...
 #' @name area_q2
@@ -331,6 +320,35 @@ area_q2.list <- function(list_of_polygons) {
 area_q2.numeric <- function(timeseries) {
   areas <- area_season(timeseries)
   return(sf::st_area(areas[[2]]))
+}
+
+#' @title ...
+#' @name area_q2.matrix
+#'
+#' @description Area of the closed shape over the second quadrant
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+area_q2.matrix <- function(timeseries) {
+
+  # create a sf polygons object
+  polygon <- create_polygon_v3(timeseries)
+
+  # get coordinates from points
+  pts_poly <- sf::st_coordinates(polygon)
+
+  # get time series instances
+  instances_time <- dim(timeseries)[[2]]
+
+  pts_bbox <- get_seasons_fast(pts_poly, instances_time)
+
+  # creates a polygon in top left quadrant
+  poly_topright <- sfheaders::sf_polygon(polytopright(pts_bbox),
+                                         polygon_id = 3)
+
+  return(list(sf::st_area(sf::st_crop(polygon, poly_topright)), sf::st_crop(polygon, poly_topright)))
 }
 #' @title ...
 #' @name area_q3
@@ -370,6 +388,34 @@ area_q3.numeric <- function(timeseries) {
   return(sf::st_area(areas[[3]]))
 }
 #' @title ...
+#' @name area_q3.matrix
+#'
+#' @description Area of the closed shape over the third quadrant.
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+area_q3.matrix <- function(timeseries) {
+
+  # create a sf polygons object
+  polygon <- create_polygon_v3(timeseries)
+
+  # get coordinates from points
+  pts_poly <- sf::st_coordinates(polygon)
+
+  # get time series instances
+  instances_time <- dim(timeseries)[[2]]
+
+  pts_bbox <- get_seasons_fast(pts_poly, instances_time)
+
+  # creates a polygon in top left quadrant
+  poly_bottomleft <- sfheaders::sf_polygon(polybottomleft(pts_bbox),
+                                           polygon_id = 3)
+
+  return(list(sf::st_area(sf::st_crop(polygon, poly_bottomleft)), sf::st_crop(polygon, poly_bottomleft)))
+}
+#' @title ...
 #' @name area_q4
 #'
 #' @description Area of the closed shape over the fourth quadrant
@@ -407,6 +453,33 @@ area_q4.numeric <- function(timeseries) {
   return(sf::st_area(areas[[4]]))
 }
 #' @title ...
+#' @name area_q4.matrix
+#'
+#' @description Area of the closed shape over the fourth quadrant
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+area_q4.matrix <- function(timeseries) {
+  # create a sf polygons object
+  polygon <- create_polygon_v3(timeseries)
+
+  # get coordinates from points
+  pts_poly <- sf::st_coordinates(polygon)
+
+  # get time series instances
+  instances_time <- dim(timeseries)[[2]]
+
+  pts_bbox <- get_seasons_fast(pts_poly, instances_time)
+
+  # creates a polygon in top left quadrant
+  poly_bottomright <- sfheaders::sf_polygon(polybottomright(pts_bbox),
+                                            polygon_id = 3)
+
+  return(list(sf::st_area(sf::st_crop(polygon, poly_bottomright)), sf::st_crop(polygon, poly_bottomright)))
+}
+#' @title ...
 #' @name polar_balance
 #'
 #' @description The standard deviation of the areas per season
@@ -437,6 +510,52 @@ polar_balance.list <- function(list_of_polygons) {
 
   return(std_numpy(unlist(areas_list)))
 }
+
+#' @title ...
+#' @name get_all_areas
+#'
+#' @description The standard deviation of the areas per season
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+get_all_areas <- function(timeseries) {
+  # create a sf polygons object
+  polygon <- create_polygon_v3(timeseries)
+
+  # get coordinates from points
+  pts_poly <- sf::st_coordinates(polygon)
+
+  # get time series instances
+  instances_time <- dim(timeseries)[[2]]
+
+  pts_bbox <- get_seasons_fast(pts_poly, instances_time)
+
+  # creates a polygon in top left quadrant
+  poly_topleft <- sfheaders::sf_polygon(polytopleft(pts_bbox),
+                                        polygon_id = 3)
+
+  # creates a polygon in top left quadrant
+  poly_topright <- sfheaders::sf_polygon(polytopright(pts_bbox),
+                                         polygon_id = 3)
+
+  # creates a polygon in top left quadrant
+  poly_bottomleft <- sfheaders::sf_polygon(polybottomleft(pts_bbox),
+                                           polygon_id = 3)
+
+  # creates a polygon in top left quadrant
+  poly_bottomright <- sfheaders::sf_polygon(polybottomright(pts_bbox),
+                                            polygon_id = 3)
+
+
+  return(cbind(sf::st_area(sf::st_crop(polygon, poly_topleft)),
+               sf::st_area(sf::st_crop(polygon, poly_topright)),
+               sf::st_area(sf::st_crop(polygon, poly_bottomleft)),
+               sf::st_area(sf::st_crop(polygon, poly_bottomright))))
+
+}
+
 #' @title ...
 #' @name polar_balance.numeric
 #'
@@ -457,7 +576,20 @@ polar_balance.numeric <- function(timeseries) {
 
   return(std_numpy(unlist(areas_list)))
 }
+#' @title ...
+#' @name polar_balance.matrix
+#'
+#' @description The standard deviation of the areas per season
+#'
+#' @param timeseries ...
+#'
+#' @return ...
+#' @export
+polar_balance.matrix <- function(timeseries) {
+  areas <- get_all_areas(timeseries)
 
+  return(std_np(areas))
+}
 ####  Light metrics  ####
 # Metricas que não dependem de função repetitivas
 #' @title ...

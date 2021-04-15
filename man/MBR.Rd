@@ -16,5 +16,5 @@ MBR(p)
 ...
 }
 \note{
-é necessária a instação do pacote grDevices para o método chull
+é necessária a instalação do pacote grDevices para o método chull
 }

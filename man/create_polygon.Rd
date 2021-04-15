@@ -2,7 +2,7 @@
 % Please edit documentation in R/polar_metrics.R
 \name{create_polygon}
 \alias{create_polygon}
-\title{...}
+\title{Create a po}
 \usage{
 create_polygon(timeseries)
 }
@@ -13,5 +13,5 @@ create_polygon(timeseries)
 a polygon object from \code{sf} class
 }
 \description{
-...
+Create a po
 }
