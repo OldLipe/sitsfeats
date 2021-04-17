@@ -141,11 +141,3 @@ calc_csi <- function(line_length, poly_area) {
     .Call(`_sitsfeats_calc_csi`, line_length, poly_area)
 }
 
-mod <- function(a, n) {
-    .Call(`_sitsfeats_mod`, a, n)
-}
-
-sutherland <- function(subjectPoly, clipPoly) {
-    .Call(`_sitsfeats_sutherland`, subjectPoly, clipPoly)
-}
-

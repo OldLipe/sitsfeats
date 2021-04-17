@@ -51,6 +51,24 @@ create_polygon_v3 <- function(timeseries) {
   return(sfheaders::sf_polygon( poly_list, polygon_id = 3))
 }
 #' @title ...
+#' @name create_polygon_geos
+#'
+#' @param timeseries ...
+#'
+#' @return a polygon object from \code{sf} class
+create_polygon_geos <- function(timeseries) {
+
+  # TODO: comentar
+  pts_values <- calculate_vec_v3_id(timeseries)
+
+  poly_list <- do.call(rbind, pts_values)
+
+  # return only polygon object, not geometry collection
+  return(geos::geos_make_polygon(x = poly_list[,1],
+                                 y = poly_list[,2],
+                                 feature_id = poly_list[,3]))
+}
+#' @title ...
 #' @name calc_bbox
 #'
 #' @param x ...
@@ -769,11 +787,14 @@ ecc_metric.numeric <- function(timeseries) {
 #' @export
 ecc_metric.matrix <- function(timeseries) {
 
-  polygon <- create_polygon_v3(timeseries)
+  polygon <- create_polygon_geos(timeseries)
 
-  pts_mbr <- MBR(sf::st_coordinates(polygon)[,1:2])
+  pts_mbr <- geos::geos_minimum_rotated_rectangle(polygon)
 
-  bbox_pts <- sf::st_bbox(pts_mbr)
+  # solucao lenta
+  pts_mbr_sf <- sf::st_as_sf(pts_mbr)
+
+  #bbox_pts <- sf::st_bbox(pts_mbr_sf)
 
   axis1 = bbox_pts[["xmax"]] - bbox_pts[["xmin"]]
   axis2 = bbox_pts[["ymax"]] - bbox_pts[["ymin"]]
