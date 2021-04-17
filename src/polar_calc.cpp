@@ -13,11 +13,9 @@ arma::mat calculate_vec(const arma::vec& timeseries) {
 
   //Rcpp::Rcout << timeseries.n_elem << std::endl;
   for (arma::uword i = 0; i < timeseries.n_elem; i++) {
-    //double a = timeseries[i] * cos((2 * arma::datum::pi * i) / timeseries.n_elem);
-    //double o = timeseries[i] * sin((2 * arma::datum::pi * i) / timeseries.n_elem);
 
-    pts(i,0) = timeseries[i] * cos((2 * arma::datum::pi * i) / timeseries.n_elem);;
-    pts(i,1) = timeseries[i] * sin((2 * arma::datum::pi * i) / timeseries.n_elem);;
+    pts(i,0) = timeseries[i] * cos((2 * arma::datum::pi * i) / timeseries.n_elem);
+    pts(i,1) = timeseries[i] * sin((2 * arma::datum::pi * i) / timeseries.n_elem);
   }
   return pts;
 }
