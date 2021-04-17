@@ -791,17 +791,26 @@ ecc_metric.matrix <- function(timeseries) {
 
   pts_mbr <- geos::geos_minimum_rotated_rectangle(polygon)
 
+  # Transforming to geos to sf
+  pts_sf <- sf::st_as_sf(pts_mbr)
+
   # solucao lenta
+  # TODO: calcular bbox no cpp
   pts_mbr_sf <- sf::st_as_sf(pts_mbr)
 
-  #bbox_pts <- sf::st_bbox(pts_mbr_sf)
+  st_bbox_by_feature = function(sf_obj) {
+    geom <- sf::st_geometry(sf_obj)
+    do.call(rbind, lapply(geom, sf::st_bbox))
+  }
 
-  axis1 = bbox_pts[["xmax"]] - bbox_pts[["xmin"]]
-  axis2 = bbox_pts[["ymax"]] - bbox_pts[["ymin"]]
-  stats = c(axis1, axis2)
+  bbox_pts <- st_bbox_by_feature(pts_mbr_sf)
 
-  return(min(stats) / max(stats))
-
+  # axis1 = bbox_pts[["xmax"]] - bbox_pts[["xmin"]]
+  # axis2 = bbox_pts[["ymax"]] - bbox_pts[["ymin"]]
+  # stats = c(axis1, axis2)
+  #
+  # return(min(stats) / max(stats))
+  return(calc_ecc(bbox_pts))
 }
 
 #' @title ...

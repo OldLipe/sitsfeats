@@ -125,6 +125,10 @@ std_np <- function(timeseries) {
     .Call(`_sitsfeats_std_np`, timeseries)
 }
 
+calc_ecc <- function(bboxmat) {
+    .Call(`_sitsfeats_calc_ecc`, bboxmat)
+}
+
 teste_linspace <- function(r, len) {
     .Call(`_sitsfeats_teste_linspace`, r, len)
 }

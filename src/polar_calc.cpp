@@ -263,33 +263,17 @@ arma::mat std_np(const arma::mat& timeseries) {
 
   return arma::stddev(timeseries, 1, 1);
 }
-// // [[Rcpp::depends(grDevices)]]
-// // [[Rcpp::export]]
-// Rcpp::List integratecpp(double llim, double ulim)
-// {
-//   Rcpp::Function p_cubature = R_GetCCallable("cubature", "adapt_integrate");
-//
-//   Rcpp::List result = p_cubature(integrand, llim, ulim);
-//   return(result);
-// }
 
-// // [[Rcpp::depends(grDevices)]]
-// // [[Rcpp::export]]
-// arma::vec integratecpp(arma::mat& llim) {
-//   Rcpp::Function p_chull = R_GetCCallable("grDevices", "chull");
-//
-//   arma::vec result = p_chull(llim);
-//   return(result);
-// }
+// [[Rcpp::export]]
+arma::mat calc_ecc(const arma::mat& bboxmat) {
 
-// // [[Rcpp::export]]
-// arma::vec integratecpp(arma::mat& llim) {
-//   //Rcpp::Function p_chull = R_GetCCallable("grDevices", "chull");
-//
-//   arma::vec result = chull(llim);
-//   return(result);
-// }
+  arma::mat axis (bboxmat.n_rows, 2, arma::fill::zeros);
 
+  axis.col(0) = bboxmat.col(2) - bboxmat.col(0);
+  axis.col(1) = bboxmat.col(3) - bboxmat.col(1);
+
+  return arma::min(axis, 1)/arma::max(axis, 1);
+}
 
 // [[Rcpp::export]]
 arma::vec teste_linspace(const arma::mat& r, const arma::uword len) {
