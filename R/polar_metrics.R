@@ -300,7 +300,7 @@ area_q1.matrix <- function(timeseries) {
   poly_topleft <- sfheaders::sf_polygon(polytopleft(pts_bbox),
                                         polygon_id = 3)
 
-  return(list(sf::st_area(sf::st_crop(polygon, poly_topleft)), sf::st_crop(polygon, poly_topleft)))
+  return(sf::st_area(sf::st_crop(polygon, poly_topleft)))
 }
 #' @title ...
 #' @name area_q2
@@ -366,7 +366,7 @@ area_q2.matrix <- function(timeseries) {
   poly_topright <- sfheaders::sf_polygon(polytopright(pts_bbox),
                                          polygon_id = 3)
 
-  return(list(sf::st_area(sf::st_crop(polygon, poly_topright)), sf::st_crop(polygon, poly_topright)))
+  return(sf::st_area(sf::st_crop(polygon, poly_topright)))
 }
 #' @title ...
 #' @name area_q3
@@ -431,7 +431,7 @@ area_q3.matrix <- function(timeseries) {
   poly_bottomleft <- sfheaders::sf_polygon(polybottomleft(pts_bbox),
                                            polygon_id = 3)
 
-  return(list(sf::st_area(sf::st_crop(polygon, poly_bottomleft)), sf::st_crop(polygon, poly_bottomleft)))
+  return(sf::st_area(sf::st_crop(polygon, poly_bottomleft)))
 }
 #' @title ...
 #' @name area_q4
@@ -495,7 +495,7 @@ area_q4.matrix <- function(timeseries) {
   poly_bottomright <- sfheaders::sf_polygon(polybottomright(pts_bbox),
                                             polygon_id = 3)
 
-  return(list(sf::st_area(sf::st_crop(polygon, poly_bottomright)), sf::st_crop(polygon, poly_bottomright)))
+  return(sf::st_area(sf::st_crop(polygon, poly_bottomright)))
 }
 #' @title ...
 #' @name polar_balance
@@ -788,28 +788,20 @@ ecc_metric.numeric <- function(timeseries) {
 ecc_metric.matrix <- function(timeseries) {
 
   polygon <- create_polygon_geos(timeseries)
-
   pts_mbr <- geos::geos_minimum_rotated_rectangle(polygon)
-
-  # Transforming to geos to sf
-  pts_sf <- sf::st_as_sf(pts_mbr)
 
   # solucao lenta
   # TODO: calcular bbox no cpp
-  pts_mbr_sf <- sf::st_as_sf(pts_mbr)
+  # Transforming to geos to sf
+  pts_sf <- sf::st_as_sf(pts_mbr)
 
   st_bbox_by_feature = function(sf_obj) {
     geom <- sf::st_geometry(sf_obj)
     do.call(rbind, lapply(geom, sf::st_bbox))
   }
 
-  bbox_pts <- st_bbox_by_feature(pts_mbr_sf)
+  bbox_pts <- st_bbox_by_feature(pts_sf)
 
-  # axis1 = bbox_pts[["xmax"]] - bbox_pts[["xmin"]]
-  # axis2 = bbox_pts[["ymax"]] - bbox_pts[["ymin"]]
-  # stats = c(axis1, axis2)
-  #
-  # return(min(stats) / max(stats))
   return(calc_ecc(bbox_pts))
 }
 
@@ -823,7 +815,7 @@ ecc_metric.matrix <- function(timeseries) {
 #' @return ...
 MBR <- function(p) {
   # Analyze the convex hull edges
-  #browser(0)
+  browser(0)
   a <- grDevices::chull(p)              # Indexes of extremal points
   a <- c(a, a[1])                       # Close the loop
   e <- p[a[-1],] - p[a[-length(a)], ]   # Edge directions
@@ -943,7 +935,7 @@ gyration_radius.matrix <- function(timeseries) {
   pts_cent <- sf::st_coordinates(sf::st_centroid(polygon))
   pts_line <- sf::st_coordinates(sfheaders::sf_cast(polygon, "LINESTRING"))[,1:2]
 
-  return(mean(gr_calc(pts_cent, pts_line, size_col)))
+  return(gr_calc(pts_cent, pts_line, size_col))
 }
 
 #' @title ...

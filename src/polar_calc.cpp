@@ -268,10 +268,8 @@ arma::mat std_np(const arma::mat& timeseries) {
 arma::mat calc_ecc(const arma::mat& bboxmat) {
 
   arma::mat axis (bboxmat.n_rows, 2, arma::fill::zeros);
-
   axis.col(0) = bboxmat.col(2) - bboxmat.col(0);
   axis.col(1) = bboxmat.col(3) - bboxmat.col(1);
-
   return arma::min(axis, 1)/arma::max(axis, 1);
 }
 
