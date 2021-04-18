@@ -20,6 +20,7 @@ Imports: Rcpp,
          cowplot,
          grDevices,
          RRF,
-         FSelectorRcpp
+         FSelectorRcpp,
+         geos
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1

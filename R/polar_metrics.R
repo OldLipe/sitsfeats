@@ -790,8 +790,9 @@ ecc_metric.matrix <- function(timeseries) {
   polygon <- create_polygon_geos(timeseries)
   pts_mbr <- geos::geos_minimum_rotated_rectangle(polygon)
 
-  # solucao lenta
-  # TODO: calcular bbox no cpp
+  # slow solution
+  # TODO: calculite bbox in cpp
+
   # Transforming to geos to sf
   pts_sf <- sf::st_as_sf(pts_mbr)
 
