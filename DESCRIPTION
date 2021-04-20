@@ -1,16 +1,22 @@
 Package: sitsfeats
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Time Series Metric Extraction from Satellite Imagery
+Version: 0.0.1
 Date: 2021-03-06
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: 
+    person(given = "Felipe",
+           family = "Carvalho",
+           role = c("aut", "cre"),
+           email = "lipecaso@gmail.com")
+Maintainer: Felipe Carvalho <lipecaso@gmail.com>
+Description: Provides a set of temporal metrics derived from satellite image.
+License: MIT + file LICENSE
 Encoding: UTF-8
+Depends: R (>= 3.5)
 Imports: Rcpp,
          RcppArmadillo,
          sf,
+         sfheaders,
          ggplot2,
          tibble,
          dplyr,
@@ -18,9 +24,11 @@ Imports: Rcpp,
          ggspatial,
          ggthemes,
          cowplot,
-         grDevices,
          RRF,
          FSelectorRcpp,
          geos
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
+Suggests: testthat (>= 3.0.0)
+
+
