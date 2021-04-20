@@ -2,21 +2,56 @@
 % Please edit documentation in R/polar_metrics.R
 \name{polar_metrics}
 \alias{polar_metrics}
-\title{...}
+\alias{area_q1}
+\alias{area_q2}
+\alias{area_q3}
+\alias{area_q4}
+\alias{polar_balance}
+\alias{angle}
+\alias{area_ts}
+\alias{ecc_metric}
+\alias{gyration_radius}
+\alias{csi}
+\title{Polar metrics}
 \usage{
-polar_metrics(timeseries, metrics = c())
+area_q1(timeseries)
+
+area_q2(timeseries)
+
+area_q3(timeseries)
+
+area_q4(timeseries)
+
+polar_balance(timeseries)
+
+angle(timeseries)
+
+area_ts(timeseries)
+
+ecc_metric(timeseries)
+
+gyration_radius(timeseries)
+
+csi(timeseries)
 }
 \arguments{
-\item{timeseries}{...}
-
-\item{metrics}{...}
+\item{timeseries}{a \code{numeric} or \code{matrix} object where the
+columns is the point in time.}
 }
 \value{
-...
+a \code{numeric} vector for each metric in each time series
 }
 \description{
-...
-}
-\note{
-é necessária a instação do pacote grDevices para o método chull
+The \code{area_q1()} area of the closed shape over the first quadrant
+The \code{area_q2()} area of the closed shape over the second quadrant
+The \code{area_q3()} area of the closed shape over the third quadrant.
+The \code{area_q4()} area of the closed shape over the fourth quadrant
+The \code{polar_balance()} the standard deviation of the areas per season
+The \code{angle()} the angle of the closed shape
+The \code{area_ts()} area of the closed shape
+The \code{ecc_metric()} return values close to 0 if the shape is a circle and
+ 1
+The \code{gyration_radius()} equals the average distance between each point
+ inside
+The \code{csi()} this is a dimensionless quantitative measure of morphology
 }

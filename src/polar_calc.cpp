@@ -6,40 +6,7 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-arma::mat calculate_vec(const arma::vec& timeseries) {
-
-
-  arma::mat pts(timeseries.n_rows, 2, arma::fill::zeros);
-
-  //Rcpp::Rcout << timeseries.n_elem << std::endl;
-  for (arma::uword i = 0; i < timeseries.n_elem; i++) {
-
-    pts(i,0) = timeseries[i] * cos((2 * arma::datum::pi * i) / timeseries.n_elem);
-    pts(i,1) = timeseries[i] * sin((2 * arma::datum::pi * i) / timeseries.n_elem);
-  }
-  return pts;
-}
-
-// [[Rcpp::export]]
-Rcpp::NumericMatrix chn(const Rcpp::NumericMatrix& x){
-
-  // problema dessa soluçao é que ela é lenta
-
-  // Obtain environment containing function
-  Rcpp::Environment geometry("package:geometry");
-
-  // Make function callable from C++
-  Rcpp::Function chn = geometry["convhulln"];
-
-  // Call the function and receive its list output
-  Rcpp::NumericMatrix res = chn(x); // example of additional param
-
-  // Return test object in list structure
-  return res;
-}
-
-// [[Rcpp::export]]
-arma::rowvec calc_bbox_fast(const arma::mat& pts) {
+arma::rowvec calc_bbox(const arma::mat& pts) {
   double minx = -arma::max(arma::abs(pts.col(0)));
   double miny = -arma::max(arma::abs(pts.col(1)));
 
@@ -60,7 +27,7 @@ arma::mat get_seasons_fast(const arma::mat& pts, const arma::uword colsize) {
   for (arma::uword i = 0; i < nrows_origin; i++) {
 
     arma::mat line = pts.submat( c, 0, c + colsize, 1 );
-    pts_bbox.row(i) = calc_bbox_fast(line);
+    pts_bbox.row(i) = calc_bbox(line);
 
     c = c + colsize;
   }
@@ -145,7 +112,7 @@ arma::mat polybottomright(const arma::mat bbox_pts){
 }
 
 // [[Rcpp::export]]
-arma::vec reptest(arma::uword x, arma::uword time) {
+arma::vec repvalues(arma::uword x, arma::uword time) {
   //int n = y.size();
   arma::vec myvector(time, arma::fill::zeros);
   for (arma::uword i = 0; i < time; ++i) {
@@ -155,7 +122,7 @@ arma::vec reptest(arma::uword x, arma::uword time) {
 }
 
 // [[Rcpp::export]]
-Rcpp::List calculate_vec_v3(arma::mat& timeseries) {
+Rcpp::List calculate_polar(arma::mat& timeseries) {
 
   timeseries = arma::abs(timeseries);
 
@@ -174,67 +141,10 @@ Rcpp::List calculate_vec_v3(arma::mat& timeseries) {
     x(timeseries.n_cols) = x(0);
     y(timeseries.n_cols) = y(0);
 
-    pts[i] = arma::join_rows(x,y);
+    pts[i] = arma::join_rows(x,y, repvalues(i, timeseries.n_cols + 1));
   }
   return pts;
 }
-
-// [[Rcpp::export]]
-Rcpp::List calculate_vec_v3_id(arma::mat& timeseries) {
-
-  timeseries = arma::abs(timeseries);
-
-  arma::vec x(timeseries.n_cols + 1, arma::fill::zeros);
-  arma::vec y(timeseries.n_cols + 1, arma::fill::zeros);
-  Rcpp::List pts (timeseries.n_rows);
-
-  for (arma::uword i = 0; i < timeseries.n_rows; i++) {
-    for (arma::uword c = 0; c < timeseries.n_cols; c++) {
-
-      x(c) = timeseries(i,c) * cos((2 * arma::datum::pi * c) / timeseries.n_cols);
-      y(c) = timeseries(i,c) * sin((2 * arma::datum::pi * c) / timeseries.n_cols);
-    }
-
-    // add the first points into last position
-    x(timeseries.n_cols) = x(0);
-    y(timeseries.n_cols) = y(0);
-
-    pts[i] = arma::join_rows(x,y, reptest(i, timeseries.n_cols + 1));
-  }
-  return pts;
-}
-
-// // [[Rcpp::export]]
-// arma::mat calculate_vec_v4(arma::mat& timeseries) {
-//
-//   timeseries = arma::abs(timeseries);
-//
-//   arma::vec x(timeseries.n_cols + 1, arma::fill::zeros);
-//   arma::vec y(timeseries.n_cols + 1, arma::fill::zeros);
-//   arma::mat xy(timeseries.n_cols + 1, 3, arma::fill::zeros);
-//   arma::mat pts (timeseries.n_rows*timeseries.n_cols, 3, arma::fill::zeros);
-//
-//   for (arma::uword k = 0; k < (timeseries.n_rows*timeseries.n_cols) - timeseries.n_cols; k = k + timeseries.n_cols)
-//   for (arma::uword i = 0; i < timeseries.n_rows; i++) {
-//     for (arma::uword c = 0; c < timeseries.n_cols; c++) {
-//
-//       xy(c,0) = timeseries(i,c) * cos((2 * arma::datum::pi * c) / timeseries.n_cols);
-//       xy(c,1) = timeseries(i,c) * sin((2 * arma::datum::pi * c) / timeseries.n_cols);
-//       xy(c,2) = c;
-//
-//     }
-//
-//     pts.insert_rows(k, k + timeseries.n_cols, xy);
-//
-//     // add the first points into last position
-//     // xy(timeseries.n_cols, 0) = x(0,0);
-//     // xy(timeseries.n_cols,1) = y(0,1);
-//     // xy(timeseries.n_cols,2) = y(0,2);
-//
-//     //pts = arma::join_vert(pts, xy);
-//   }
-//   return pts;
-// }
 
 // [[Rcpp::export]]
 arma::vec calc_distance(const arma::mat& line, const arma::rowvec& pts_cent) {
@@ -243,7 +153,8 @@ arma::vec calc_distance(const arma::mat& line, const arma::rowvec& pts_cent) {
 }
 
 // [[Rcpp::export]]
-arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line, const arma::uword size_col) {
+arma::vec gr_calc(const arma::mat& pts_cent, const arma::mat& pts_line,
+                  const arma::uword size_col) {
 
   // vector to store values
   arma::vec pts_values(pts_cent.n_rows, arma::fill::zeros);
@@ -284,12 +195,6 @@ arma::vec linspace_vec(const arma::rowvec& timeseries) {
   return arma::linspace<arma::vec>(0, 2*arma::datum::pi, timeseries.n_elem);
 }
 
-// // [[Rcpp::export]]
-// arma::vec linspace_vec_2(const arma::vec& timeseries) {
-//
-//   return arma::linspace<arma::vec>(0, 2*arma::datum::pi, timeseries.n_elem);
-// }
-
 // [[Rcpp::export]]
 arma::vec calc_angle(const arma::mat& timeseries) {
 
@@ -300,7 +205,6 @@ arma::vec calc_angle(const arma::mat& timeseries) {
   }
   return pts;
 }
-
 
 // [[Rcpp::export]]
 arma::vec calc_csi(const arma::vec& line_length, const arma::vec& poly_area){
