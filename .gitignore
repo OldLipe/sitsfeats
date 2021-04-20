@@ -7,7 +7,7 @@
 *.xml
 packrat/lib*/
 .tmp
-/src/*.o
+src/*.o
 src/*.dll
 src/*.so
 R/.Rapp.history
