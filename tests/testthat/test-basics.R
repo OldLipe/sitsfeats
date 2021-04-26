@@ -1,5 +1,5 @@
 test_that("basics metrics - matrix", {
-  data("timeseries")
+  data("timeseries", package = "sitsfeats")
 
   # max_ts
   testthat::expect_vector(max_ts(timeseries),
@@ -77,7 +77,7 @@ test_that("basics metrics - matrix", {
 })
 
 test_that("basics metrics - numeric", {
-  data("timeseries")
+  data("timeseries", package = "sitsfeats")
 
   timeseries <- timeseries[1,]
 

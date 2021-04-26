@@ -13,20 +13,11 @@ Description: Provides a set of temporal metrics derived from satellite image.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 3.5)
-Imports: Rcpp,
-         RcppArmadillo,
-         sf,
+Imports: sf,
          sfheaders,
+         geos,
          ggplot2,
-         tibble,
-         dplyr,
-         magrittr,
-         ggspatial,
-         ggthemes,
-         cowplot,
-         RRF,
-         FSelectorRcpp,
-         geos
+         cowplot
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 Suggests: testthat (>= 3.0.0)

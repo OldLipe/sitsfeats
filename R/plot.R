@@ -27,13 +27,14 @@ polar_plot <- function(timeseries) {
                        polybottomright(pts_bbox))
 
   matrix_poly[,3] <- rep(1:4, each = 5)
-  # area q1
+
+  # creating a sf object with 4 quadrants
   poly <- sfheaders::sf_polygon(matrix_poly, polygon_id = 3)
+  poly$quadrant <- c("Q1", "Q2", "Q3", "Q4")
 
-  g <- dplyr::mutate(poly, quadrant = c("Q1", "Q2", "Q3", "Q4"))
 
-  polar_gg <- ggplot2::ggplot(g) +
-    ggplot2::geom_sf(ggplot2::aes(fill = g$quadrant), alpha = 0.1) +
+  polar_gg <- ggplot2::ggplot(poly) +
+    ggplot2::geom_sf(ggplot2::aes(fill = quadrant), alpha = 0.1) +
     ggplot2::geom_sf(data = polygon, fill = "darkblue", alpha = 0.4) +
     ggplot2::scale_x_continuous(expand = c(0, 0)) +
     ggplot2::scale_y_continuous(expand = c(0, 0)) +

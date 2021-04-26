@@ -1,12 +1,12 @@
 test_that("General errors", {
-  data("timeseries")
+  data("timeseries", package = "sitsfeats")
 
   # error param
   testthat::expect_error(area_q1(as.character(timeseries)))
 })
 
 test_that("area metrics - matrix", {
-  data("timeseries")
+  data("timeseries", package = "sitsfeats")
 
   # area q1
   testthat::expect_vector(area_q1(timeseries),
@@ -35,7 +35,7 @@ test_that("area metrics - matrix", {
 })
 
 test_that("area metrics - numeric", {
-  data("timeseries")
+  data("timeseries", package = "sitsfeats")
 
   timeseries <- timeseries[1,]
 
@@ -67,7 +67,7 @@ test_that("area metrics - numeric", {
 })
 
 test_that("temporal metrics - matrix", {
-  data("timeseries")
+  data("timeseries", package = "sitsfeats")
 
   # angle
   testthat::expect_vector(angle(timeseries),
@@ -97,7 +97,7 @@ test_that("temporal metrics - matrix", {
 })
 
 test_that("temporal metrics - numeric", {
-  data("timeseries")
+  data("timeseries", package = "sitsfeats")
 
   timeseries <- timeseries[1,]
 
