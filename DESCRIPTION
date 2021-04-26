@@ -11,6 +11,8 @@ Authors@R:
 Maintainer: Felipe Carvalho <lipecaso@gmail.com>
 Description: Provides a set of temporal metrics derived from satellite image.
 License: MIT + file LICENSE
+URL: https://github.com/oldlipe/sitsfeats/
+BugReports: https://github.com/oldlipe/sitsfeats/issues
 Encoding: UTF-8
 Depends: R (>= 3.5)
 Imports: sf,
@@ -18,8 +20,9 @@ Imports: sf,
          geos,
          ggplot2,
          cowplot
+Suggests: testthat (>= 3.0.0),
+          Rcpp,
+          RcppArmadillo
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
-Suggests: testthat (>= 3.0.0)
-
 
