@@ -1,2 +1,2 @@
-#' @useDynLib sitsfeats, .registration = TRUE
-NULL
+# global var
+utils::globalVariables("quadrant")

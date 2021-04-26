@@ -15,14 +15,15 @@ URL: https://github.com/oldlipe/sitsfeats/
 BugReports: https://github.com/oldlipe/sitsfeats/issues
 Encoding: UTF-8
 Depends: R (>= 3.5)
-Imports: sf,
-         sfheaders,
-         geos,
-         ggplot2,
-         cowplot
+Imports: 
+    sf,
+    sfheaders,
+    geos,
+    ggplot2,
+    cowplot
 Suggests: testthat (>= 3.0.0),
           Rcpp,
-          RcppArmadillo
+          RcppArmadillo,
+          wk
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
-
