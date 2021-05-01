@@ -34,7 +34,7 @@ polar_plot <- function(timeseries) {
 
 
   polar_gg <- ggplot2::ggplot(poly) +
-    ggplot2::geom_sf(ggplot2::aes(fill = quadrant), alpha = 0.1) +
+    ggplot2::geom_sf(ggplot2::aes_string(fill = "quadrant"), alpha = 0.1) +
     ggplot2::geom_sf(data = polygon, fill = "darkblue", alpha = 0.4) +
     ggplot2::scale_x_continuous(expand = c(0, 0)) +
     ggplot2::scale_y_continuous(expand = c(0, 0)) +
@@ -50,7 +50,8 @@ polar_plot <- function(timeseries) {
                                           hjust = 0.5),
       strip.background = ggplot2::element_blank()) +
     ggplot2::guides(
-      colour = ggplot2::guide_legend(nrow = 3, override.aes = list(size = 2)))
+      colour = ggplot2::guide_legend(nrow = 3, override.aes = list(size = 2))) +
+    ggplot2::labs(fill = "Area")
 
   polar_gg
 }

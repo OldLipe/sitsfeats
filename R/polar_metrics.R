@@ -3,21 +3,36 @@
 #' @name polar_metrics
 #'
 #' @description
-#' The \code{area_q1()} area of the closed shape over the first quadrant
-#' The \code{area_q2()} area of the closed shape over the second quadrant
-#' The \code{area_q3()} area of the closed shape over the third quadrant.
-#' The \code{area_q4()} area of the closed shape over the fourth quadrant
-#' The \code{polar_balance()} the standard deviation of the areas per season
-#' The \code{angle()} the angle of the closed shape
-#' The \code{area_ts()} area of the closed shape
-#' The \code{ecc_metric()} return values close to 0 if the shape is a circle and
-#'  1
-#' The \code{gyration_radius()} equals the average distance between each point
-#'  inside
-#' The \code{csi()} this is a dimensionless quantitative measure of morphology
+#' The package sitsfeats provides a set of polars metrics:
+#' \itemize{
+#'   \item The \code{area_q1()}area of the closed shape over the first quadrant.
+#'   \item The \code{area_q2()} area of the closed shape over the second
+#'    quadrant.
+#'   \item The \code{area_q3()} area of the closed shape over the third
+#'   quadrant.
+#'   \item The \code{area_q4()} area of the closed shape over the fourth
+#'    quadrant
+#'   \item The \code{polar_balance()} the standard deviation of the areas per
+#'   season.
+#'   \item The \code{angle()} the angle of the closed shape.
+#'   \item The \code{area_ts()} area of the closed shape.
+#'   \item The \code{ecc_metric()} return values close to 0 if the shape is a
+#'   circle and 1.
+#'   \item The \code{gyration_radius()} equals the average distance between each
+#'   point inside.
+#'   \item The \code{csi()} this is a dimensionless quantitative measure of
+#'   morphology.
+#' }
 #'
 #' @param timeseries   a \code{numeric} or \code{matrix} object where the
 #'  columns is the point in time.
+#'
+#' @examples
+#' data("timeseries")
+#' areas_values <- rbind(sitsfeats::area_q1(timeseries),
+#'                       sitsfeats::area_q2(timeseries),
+#'                       sitsfeats::area_q3(timeseries),
+#'                       sitsfeats::area_q4(timeseries))
 #'
 #' @return a \code{numeric} vector for each metric in each time series
 #'
