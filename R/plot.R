@@ -1,9 +1,11 @@
-#' @title ...
+#' @title Creates a polar plot based on areas ...
 #' @name polar_plot
 #'
-#' @param timeseries ...
+#' @param timeseries   a \code{numeric} or \code{matrix} object where the
+#'  columns is the point in time.
 #'
 #' @return a polygon object from \code{sf} class
+#' @export
 polar_plot <- function(timeseries) {
 
   polygon <- create_polygon(timeseries)
