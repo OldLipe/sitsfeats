@@ -66,6 +66,6 @@ polar_metrics
 sitsfeats::polar_plot(timeseries[1,])
 ```
 
-<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" />
+<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Contributions

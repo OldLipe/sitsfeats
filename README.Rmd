@@ -57,7 +57,7 @@ polar_metrics
 
 ### Polar metrics visualization
 
-```{r}
+```{r, fig.align="center", fig.height=5, fig.width=9, dpi=300}
 # plot first time series example
 sitsfeats::polar_plot(timeseries[1,])
 ```
