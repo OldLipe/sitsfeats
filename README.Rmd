@@ -22,10 +22,10 @@ R package for extracting metrics from time series of satellite images
 
 <!-- TODO: improve this text -->
 
-The goal of the sitsfeats package is to extract temporal metrics from time series derived from satellite images. The metrics implemented in this version are:
+The goal of the sitsfeats package is to extract temporal metrics from satellite images time series. The metrics implemented in this version are:
   
-  - basics: statistics metrics
-  - polar: polar metrics
+  - **basics**: statistics metrics
+  - **polar**: polar metrics
 
 ## Installation
 
@@ -38,7 +38,29 @@ devtools::install_github("oldlipe/sitsfeats")
 
 ## How to use?
 
+### Polar metrics example
+```{r}
+# loading sitsfeats and tibble packages
+library(sitsfeats)
+library(tibble)
 
+# loading example time series
+data("timeseries")
+
+polar_metrics <- tibble::tibble(area_q1 = sitsfeats::area_q1(timeseries),
+                                area_q2 = sitsfeats::area_q2(timeseries),
+                                area_q3 = sitsfeats::area_q3(timeseries),
+                                area_q4 = sitsfeats::area_q3(timeseries))
+
+polar_metrics
+```
+
+### Polar metrics visualization
+
+```{r}
+# plot first time series example
+sitsfeats::polar_plot(timeseries[1,])
+```
 
 ## Contributions
 
