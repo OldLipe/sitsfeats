@@ -63,26 +63,39 @@ columns is the point in time.}
 a \code{numeric} vector for each metric in each time series
 }
 \description{
-The \code{max_ts()} retrieves the maximum value contained in the time series
-The \code{min_ts()} retrieves the minimum value contained in the time series
-The \code{mean_ts()} retrieves the mean value of the time series
-The \code{median_ts()} retrieves the median value of the time series
-The \code{sum_ts()} retrieves the sum of all time series points
-The \code{std_ts()} retrieves the standard deviation of the time series
-The \code{skew_ts()} retrieves the skewness of the time series
-The \code{kurt_ts()} retrieves the kurtosis of the time series
-The \code{amplitude_ts()} retrieves the amplitude of the time series
-The \code{fslope_ts()} retrieves the first slope of the time series
-The \code{abs_sum_ts()} retrieves the absolute sum of the time series points
-The \code{amd_ts()} retrieves the absolute mean of the difference between
- each point in the time series
-The \code{mse_ts()} retrieves the mean spectral energy of the time series
-The \code{fqr_ts()} retrieves the value of the first quartile of the time
- series (0.25)
-The \code{sqr_ts()} retrieves the value of the second quartile of the time
- series (0.50)
-The \code{tqr_ts()} retrieves the value of the third quartile of the time
- series (0.75)
-The \code{iqr_ts()} retrieves the interquartile range (difference between the
- third and first quartile)
+The package sitsfeats provides a set of basics metrics:
+\itemize{
+  \item The \code{max_ts()} retrieves the maximum value contained in the time
+   series.
+  \item The \code{min_ts()} retrieves the minimum value contained in the time
+   series.
+  \item The \code{mean_ts()} retrieves the mean value of the time series.
+  \item The \code{median_ts()} retrieves the median value of the time series.
+  \item The \code{sum_ts()} retrieves the sum of all time series points.
+  \item The \code{std_ts()} retrieves the standard deviation of the time
+  series.
+  \item The \code{skew_ts()} retrieves the skewness of the time series.
+  \item The \code{kurt_ts()} retrieves the kurtosis of the time series.
+  \item The \code{amplitude_ts()} retrieves the amplitude of the time series.
+  \item The \code{fslope_ts()} retrieves the first slope of the time series.
+  \item The \code{abs_sum_ts()} retrieves the absolute sum of the time series
+   points.
+  \item The \code{amd_ts()} retrieves the absolute mean of the difference
+  between each point in the time series.
+  \item The \code{mse_ts()} retrieves the mean spectral energy of the time
+  series.
+  \item The \code{fqr_ts()} retrieves the value of the first quartile of the
+  time series (0.25).
+  \item The \code{sqr_ts()} retrieves the value of the second quartile of the
+   time series (0.50).
+  \item The \code{tqr_ts()} retrieves the value of the third quartile of the
+   time series (0.75).
+  \item The \code{iqr_ts()} retrieves the interquartile range
+  (difference between the third and first quartile).
+ }
+}
+\examples{
+data("timeseries")
+mean_values <- sitsfeats::mean_ts(timeseries)
+
 }

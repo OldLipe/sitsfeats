@@ -31,4 +31,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Felipe Carvalho \email{lipecaso@gmail.com}
 
+Authors:
+\itemize{
+  \item Karine Ferreira \email{karine.ferreira@inpe.br}
+  \item Rafael Santos \email{rafael.santos@inpe.br}
+}
+
 }
