@@ -4,10 +4,18 @@ Title: Time Series Metric Extraction from Satellite Imagery
 Version: 0.0.1
 Date: 2021-03-06
 Authors@R: 
-    person(given = "Felipe",
-           family = "Carvalho",
-           role = c("aut", "cre"),
-           email = "lipecaso@gmail.com")
+    c(person(given = "Felipe",
+             family = "Carvalho", 
+             role = c("aut", "cre"), 
+             email = "lipecaso@gmail.com"),
+    person(given = "Karine", 
+           family = "Ferreira", 
+           role = "aut", 
+           email = "karine.ferreira@inpe.br"),
+    person(given = "Rafael",
+           family = "Santos",
+           role = "aut",
+           email = "rafael.santos@inpe.br"))
 Maintainer: Felipe Carvalho <lipecaso@gmail.com>
 Description: Provides a set of temporal metrics derived from satellite image.
 License: MIT + file LICENSE
