@@ -49,7 +49,7 @@ max_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(max_calc(timeseries))
+  max_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -59,7 +59,7 @@ min_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(min_calc(timeseries))
+  min_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -69,7 +69,7 @@ mean_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(mean_calc(timeseries))
+  mean_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -79,7 +79,7 @@ median_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(median_calc(timeseries))
+  median_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -89,7 +89,7 @@ sum_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(sum_calc(timeseries))
+  sum_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -99,7 +99,7 @@ std_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(std_calc(timeseries))
+  std_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -109,7 +109,7 @@ skew_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(skew_calc(timeseries))
+  skew_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -119,7 +119,7 @@ kurt_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(kurt_calc(timeseries))
+  kurt_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -129,7 +129,7 @@ amplitude_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(amplitude_calc(timeseries))
+  amplitude_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -139,7 +139,7 @@ fslope_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(fslope_calc(timeseries))
+  fslope_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -149,7 +149,7 @@ abs_sum_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(abs_sum_calc(timeseries))
+  abs_sum_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -159,7 +159,7 @@ amd_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(amd_calc(timeseries))
+  amd_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -169,7 +169,7 @@ mse_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(mse_calc(timeseries))
+  mse_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -179,7 +179,7 @@ fqr_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(fqr_calc(timeseries))
+  fqr_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -189,7 +189,7 @@ sqr_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(sqr_calc(timeseries))
+  sqr_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -199,7 +199,7 @@ tqr_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(tqr_calc(timeseries))
+  tqr_calc(timeseries)
 }
 
 #' @rdname basics_metrics
@@ -209,5 +209,5 @@ iqr_ts <- function(timeseries) {
   # assert that only supported types are provided
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(iqr_calc(timeseries))
+  iqr_calc(timeseries)
 }

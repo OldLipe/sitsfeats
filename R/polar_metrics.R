@@ -54,7 +54,7 @@ area_q1 <- function(timeseries) {
   poly_topleft <- sfheaders::sf_polygon(polytopleft(pts_bbox),
                                         polygon_id = 3)
 
-  return(sf::st_area(sf::st_crop(polygon, poly_topleft)))
+  cbind(sf::st_area(sf::st_crop(polygon, poly_topleft)))
 }
 
 #' @rdname polar_metrics
@@ -76,7 +76,7 @@ area_q2 <- function(timeseries) {
   poly_topright <- sfheaders::sf_polygon(polytopright(pts_bbox),
                                          polygon_id = 3)
 
-  return(sf::st_area(sf::st_crop(polygon, poly_topright)))
+  cbind(sf::st_area(sf::st_crop(polygon, poly_topright)))
 }
 
 #' @rdname polar_metrics
@@ -98,7 +98,7 @@ area_q3 <- function(timeseries) {
   poly_bottomleft <- sfheaders::sf_polygon(polybottomleft(pts_bbox),
                                            polygon_id = 3)
 
-  return(sf::st_area(sf::st_crop(polygon, poly_bottomleft)))
+  cbind(sf::st_area(sf::st_crop(polygon, poly_bottomleft)))
 }
 
 #' @rdname polar_metrics
@@ -120,7 +120,7 @@ area_q4 <- function(timeseries) {
   poly_bottomright <- sfheaders::sf_polygon(polybottomright(pts_bbox),
                                             polygon_id = 3)
 
-  return(sf::st_area(sf::st_crop(polygon, poly_bottomright)))
+  cbind(sf::st_area(sf::st_crop(polygon, poly_bottomright)))
 }
 
 #' @rdname polar_metrics
@@ -132,7 +132,7 @@ polar_balance <- function(timeseries) {
 
   areas <- get_all_areas(timeseries)
 
-  return(as.numeric(std_np(areas)))
+  std_np(areas)
 }
 
 #' @rdname polar_metrics
@@ -142,7 +142,7 @@ angle <- function(timeseries) {
   # verify if the time series are corrected
   timeseries <- .verify_timeseries(timeseries)
 
-  as.numeric(calc_angle(timeseries))
+  calc_angle(timeseries)
 }
 
 #' @rdname polar_metrics
@@ -150,7 +150,7 @@ angle <- function(timeseries) {
 area_ts <- function(timeseries) {
 
   polygon <- create_polygon(timeseries)
-  return(sf::st_area(polygon))
+  cbind(sf::st_area(polygon))
 }
 
 #' @rdname polar_metrics
@@ -173,7 +173,7 @@ ecc_metric <- function(timeseries) {
 
   bbox_pts <- st_bbox_by_feature(pts_sf)
 
-  return(as.numeric(calc_ecc(bbox_pts)))
+  calc_ecc(bbox_pts)
 }
 
 #' @rdname polar_metrics
@@ -188,7 +188,7 @@ gyration_radius <- function(timeseries) {
   pts_cent <- sf::st_coordinates(sf::st_centroid(polygon))
   pts_line <- sf::st_coordinates(sfheaders::sf_cast(polygon, "LINESTRING"))[,1:2]
 
-  return(as.numeric(gr_calc(pts_cent, pts_line, size_col)))
+  gr_calc(pts_cent, pts_line, size_col)
 }
 
 #' @rdname polar_metrics
@@ -198,5 +198,5 @@ csi <- function(timeseries) {
   polygon <- create_polygon(timeseries)
   ls <- sfheaders::sf_cast(polygon, "LINESTRING")
 
-  as.numeric(calc_csi(sf::st_length(ls), sf::st_area(polygon)))
+  calc_csi(sf::st_length(ls), sf::st_area(polygon))
 }
