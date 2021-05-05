@@ -130,9 +130,7 @@ polar_balance <- function(timeseries) {
   # verify if the time series are corrected
   timeseries <- .verify_timeseries(timeseries)
 
-  areas <- get_all_areas(timeseries)
-
-  std_np(areas)
+  get_all_areas(timeseries)
 }
 
 #' @rdname polar_metrics

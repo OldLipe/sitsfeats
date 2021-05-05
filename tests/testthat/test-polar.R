@@ -9,28 +9,23 @@ test_that("area metrics - matrix", {
   data("timeseries", package = "sitsfeats")
 
   # area q1
-  testthat::expect_vector(area_q1(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(area_q1(timeseries)),
+                          expect = nrow(timeseries))
 
   # area q2
-  testthat::expect_vector(area_q2(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(area_q2(timeseries)),
+                          expect = nrow(timeseries))
 
   # area q3
-  testthat::expect_vector(area_q3(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(area_q3(timeseries)),
+                          expect = nrow(timeseries))
   # area q4
-  testthat::expect_vector(area_q4(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(area_q4(timeseries)),
+                          expect = nrow(timeseries))
 
   # polar metrics
-  testthat::expect_vector(polar_balance(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(polar_balance(timeseries)),
+                          expect = nrow(timeseries))
 
 })
 
@@ -40,59 +35,43 @@ test_that("area metrics - numeric", {
   timeseries <- timeseries[1,]
 
   # area q1
-  testthat::expect_vector(area_q1(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(area_q1(timeseries)), n = 1)
 
   # area q2
-  testthat::expect_vector(area_q2(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(area_q2(timeseries)), n = 1)
 
   # area q3
-  testthat::expect_vector(area_q3(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(area_q3(timeseries)), n = 1)
 
   # area q4
-  testthat::expect_vector(area_q4(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(area_q4(timeseries)), n = 1)
 
   # polar metrics
-  testthat::expect_vector(polar_balance(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
-
+  testthat::expect_length(nrow(polar_balance(timeseries)), n = 1)
 })
 
 test_that("temporal metrics - matrix", {
   data("timeseries", package = "sitsfeats")
 
   # angle
-  testthat::expect_vector(angle(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(angle(timeseries)),
+                          expect = nrow(timeseries))
 
   # area_ts
-  testthat::expect_vector(area_ts(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(area_ts(timeseries)),
+                          expect = nrow(timeseries))
 
   # ecc_metric
-  testthat::expect_vector(ecc_metric(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(ecc_metric(timeseries)),
+                          expect = nrow(timeseries))
 
   # gyration_radius
-  testthat::expect_vector(gyration_radius(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(gyration_radius(timeseries)),
+                          expect = nrow(timeseries))
 
   # csi
-  testthat::expect_vector(csi(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_equal(nrow(csi(timeseries)),
+                          expect = nrow(timeseries))
 
 })
 
@@ -102,26 +81,17 @@ test_that("temporal metrics - numeric", {
   timeseries <- timeseries[1,]
 
   # angle
-  testthat::expect_vector(angle(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(angle(timeseries)), n = 1)
 
   # area_ts
-  testthat::expect_vector(area_ts(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(area_ts(timeseries)), n = 1)
+
   # ecc_metric
-  testthat::expect_vector(ecc_metric(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(ecc_metric(timeseries)), n = 1)
 
   # gyration_radius
-  testthat::expect_vector(gyration_radius(timeseries),
-                          ptype = numeric(),
-                          size = nrow(timeseries))
+  testthat::expect_length(nrow(gyration_radius(timeseries)), n = 1)
 
   # csi
-  testthat::expect_vector(csi(timeseries),
-                           ptype = numeric(),
-                           size = nrow(timeseries))
+  testthat::expect_length(nrow(csi(timeseries)), n = 1)
 })

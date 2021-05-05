@@ -95,10 +95,10 @@ get_all_areas <- function(timeseries) {
                                             polygon_id = 3)
 
 
-  return(cbind(sf::st_area(sf::st_crop(polygon, poly_topleft)),
-               sf::st_area(sf::st_crop(polygon, poly_topright)),
-               sf::st_area(sf::st_crop(polygon, poly_bottomleft)),
-               sf::st_area(sf::st_crop(polygon, poly_bottomright))))
+  return(std_np(cbind(sf::st_area(sf::st_crop(polygon, poly_topleft)),
+                      sf::st_area(sf::st_crop(polygon, poly_topright)),
+                      sf::st_area(sf::st_crop(polygon, poly_bottomleft)),
+                      sf::st_area(sf::st_crop(polygon, poly_bottomright)))))
 
 }
 
