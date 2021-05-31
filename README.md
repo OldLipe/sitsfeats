@@ -7,9 +7,10 @@ R package for extracting metrics from time series of satellite images
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/OldLipe/sitsfeats/actions/workflows/R-CMD-check.yaml/badge.svg?branch=master)](https://github.com/OldLipe/sitsfeats/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/oldlipe/sitsfeats/workflows/R-CMD-check/badge.svg)](https://github.com/oldlipe/sitsfeats/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/OldLipe/sitsfeats/branch/master/graph/badge.svg)](https://codecov.io/gh/OldLipe/sitsfeats?branch=master)
+
 <!-- badges: end -->
 
 <!-- TODO: improve this text -->
