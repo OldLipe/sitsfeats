@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# sitsfeats <img src="inst/extdata/img/logo.png" align="right" width="120"/>
+# sitsfeats - Satellite Image Time Series Features <img src="inst/extdata/img/logo.png" align="right" width="120"/>
 
 R package for extracting metrics from time series of satellite images
 
