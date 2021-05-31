@@ -7,9 +7,9 @@
 *.xml
 packrat/lib*/
 .tmp
-src/*.o
-src/*.dll
-src/*.so
+./src/*.o
+./src/*.dll
+./src/*.so
 R/.Rapp.history
 vignettes/sits.R
 README_cache/*

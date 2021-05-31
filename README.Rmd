@@ -27,6 +27,9 @@ The goal of the sitsfeats package is to extract temporal metrics from satellite 
   
   - **basics**: statistics metrics
   - **polar**: polar metrics
+  
+  
+The implementations of this package are based on the [stmetrics](https://github.com/brazil-data-cube/stmetrics) library in Python.
 
 ## Installation
 
@@ -59,9 +62,12 @@ polar_metrics
 ### Polar metrics visualization
 
 ```{r, fig.align="center", fig.height=5, fig.width=9, dpi=300}
+# get one instance from timeseries
+one_instance <- timeseries[1,]
+
 # plot first time series example
-sitsfeats::polar_plot(timeseries[1,])
+sitsfeats::polar_plot(one_instance)
 ```
 
-## Contributions
-
+## Getting help
+Feel free to create issues if you have any questions.
