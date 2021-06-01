@@ -4,7 +4,6 @@
 
 using namespace Rcpp;
 
-
 // [[Rcpp::export]]
 arma::rowvec calc_bbox(const arma::mat& pts) {
   double minx = -arma::max(arma::abs(pts.col(0)));
