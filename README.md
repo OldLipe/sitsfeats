@@ -10,10 +10,9 @@ R package for extracting metrics from time series of satellite images
 [![R-CMD-check](https://github.com/oldlipe/sitsfeats/workflows/R-CMD-check/badge.svg)](https://github.com/oldlipe/sitsfeats/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/OldLipe/sitsfeats/branch/master/graph/badge.svg)](https://codecov.io/gh/OldLipe/sitsfeats?branch=master)
-
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
-
-<!-- TODO: improve this text -->
 
 The goal of the sitsfeats package is to extract temporal metrics from
 satellite images time series. The metrics implemented in this version
