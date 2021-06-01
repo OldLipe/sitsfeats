@@ -95,3 +95,13 @@ test_that("temporal metrics - numeric", {
   # csi
   testthat::expect_length(nrow(csi(timeseries)), n = 1)
 })
+test_that("temporal metrics - numeric", {
+
+  data("timeseries", package = "sitsfeats")
+
+  # warning when more than one time series is provided
+  testthat::expect_warning(polar_plot(timeseries))
+
+  # dd
+  testthat::expect_s3_class(polar_plot(timeseries[1,]), class = "gg")
+})
