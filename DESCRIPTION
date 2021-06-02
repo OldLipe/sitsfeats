@@ -1,6 +1,6 @@
 Package: sitsfeats
 Type: Package
-Title: Time Series Metric Extraction from Satellite Imagery
+Title: Satellite Image Time Series Features
 Version: 0.0.1
 Date: 2021-03-06
 Authors@R: 
