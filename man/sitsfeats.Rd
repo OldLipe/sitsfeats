@@ -7,6 +7,10 @@
 \title{R package for extracting metrics from time series of satellite images}
 \description{
 Provides a set of temporal metrics derived from satellite image time series.
+    The basics metrics are composed of basic statistics, histogram-based statistics, and methods 
+    based on time series analysis.
+    The polar metrics, an approach proposed by Korting et al. (2013) <doi:10.1016/j.cageo.2013.02.007>, 
+    is based on the polar representation to describe cyclic events, whose events are common in agricultural applications.
 }
 \section{The \code{sitsfeats} functions}{
 
