@@ -117,10 +117,6 @@ calc_ecc <- function(bboxmat) {
     .Call(`_sitsfeats_calc_ecc`, bboxmat)
 }
 
-teste_linspace <- function(r, len) {
-    .Call(`_sitsfeats_teste_linspace`, r, len)
-}
-
 linspace_vec <- function(timeseries) {
     .Call(`_sitsfeats_linspace_vec`, timeseries)
 }

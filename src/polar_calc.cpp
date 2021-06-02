@@ -184,11 +184,6 @@ arma::mat calc_ecc(const arma::mat& bboxmat) {
 }
 
 // [[Rcpp::export]]
-arma::vec teste_linspace(const arma::mat& r, const arma::uword len) {
-  return arma::linspace<arma::vec>(0,r.n_rows, len);
-}
-
-// [[Rcpp::export]]
 arma::vec linspace_vec(const arma::rowvec& timeseries) {
 
   return arma::linspace<arma::vec>(0, 2*arma::datum::pi, timeseries.n_elem);
