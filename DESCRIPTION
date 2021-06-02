@@ -17,7 +17,7 @@ Authors@R:
            role = "aut",
            email = "rafael.santos@inpe.br"))
 Maintainer: Felipe Carvalho <lipecaso@gmail.com>
-Description: Provides a set of temporal metrics derived from satellite image.
+Description: Provides a set of temporal metrics derived from satellite image time series.
 License: MIT + file LICENSE
 URL: https://github.com/oldlipe/sitsfeats/
 BugReports: https://github.com/oldlipe/sitsfeats/issues
@@ -27,6 +27,7 @@ Imports:
     sf,
     sfheaders,
     geos,
+    libgeos,
     ggplot2,
     cowplot
 Suggests: 

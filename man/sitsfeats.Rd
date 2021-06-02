@@ -6,7 +6,7 @@
 \alias{sitsfeats-package}
 \title{R package for extracting metrics from time series of satellite images}
 \description{
-Provides a set of temporal metrics derived from satellite image.
+Provides a set of temporal metrics derived from satellite image time series.
 }
 \section{The \code{sitsfeats} functions}{
 
