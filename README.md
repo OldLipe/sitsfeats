@@ -10,6 +10,7 @@ R package for extracting metrics from time series of satellite images
 [![R-CMD-check](https://github.com/oldlipe/sitsfeats/workflows/R-CMD-check/badge.svg)](https://github.com/oldlipe/sitsfeats/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/OldLipe/sitsfeats/branch/master/graph/badge.svg)](https://codecov.io/gh/OldLipe/sitsfeats?branch=master)
+[![CRAN](http://www.r-pkg.org/badges/version/sitsfeats)](https://CRAN.R-project.org/package=sitsfeats)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
@@ -27,7 +28,13 @@ Python.
 
 ## Installation
 
-You can install the development version of sitsfeats from
+You can install the CRAN version with:
+
+``` r
+install.packages("sitsfeats")
+```
+
+Or the development version of sitsfeats from
 [github](https://github.com/OldLipe/sitsfeats) with:
 
 ``` r
@@ -43,6 +50,7 @@ devtools::install_github("oldlipe/sitsfeats")
 # loading sitsfeats and tibble packages
 library(sitsfeats)
 library(tibble)
+#> Warning: package 'tibble' was built under R version 4.0.4
 
 # loading example time series
 data("timeseries")
