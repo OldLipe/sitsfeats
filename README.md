@@ -50,7 +50,6 @@ devtools::install_github("oldlipe/sitsfeats")
 # loading sitsfeats and tibble packages
 library(sitsfeats)
 library(tibble)
-#> Warning: package 'tibble' was built under R version 4.0.4
 
 # loading example time series
 data("timeseries")
