@@ -2,16 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{create_polygon_geos}
 \alias{create_polygon_geos}
-\title{...}
+\title{Creates a polygon from geos}
 \usage{
 create_polygon_geos(timeseries)
 }
 \arguments{
-\item{timeseries}{...}
+\item{timeseries}{a \code{numeric} or \code{matrix} object where the
+columns is the point in time.}
 }
 \value{
-a polygon object from \code{sf} class
+a polygon object from \code{geos} class.
 }
 \description{
-...
+Creates a polygon from geos
 }

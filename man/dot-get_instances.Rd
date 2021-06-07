@@ -2,16 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{.get_instances}
 \alias{.get_instances}
-\title{...}
+\title{Get the number of lines contained in the polygon}
 \usage{
 .get_instances(polygon)
 }
 \arguments{
-\item{polygon}{a \code{sf} object...}
+\item{polygon}{a \code{sf} object with Polygons.}
 }
 \value{
-a \code{numeric} vector..
+a \code{numeric} vector with the number of lines contained in the
+polygon.
 }
 \description{
-...
+Get the number of lines contained in the polygon
 }

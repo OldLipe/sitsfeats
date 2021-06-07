@@ -1,9 +1,10 @@
-#' @title ...
+#' @title Creates a Polygon from sf package
 #' @name create_polygon
 #'
-#' @param timeseries ...
+#' @param timeseries   a \code{numeric} or \code{matrix} object where the
+#'  columns is the point in time.
 #'
-#' @return a polygon object from \code{sf} class
+#' @return a polygon object from \code{sf} class.
 create_polygon <- function(timeseries) {
 
   # verify if the time series are corrected
@@ -17,18 +18,20 @@ create_polygon <- function(timeseries) {
   # return only polygon object, not geometry collection
   return(sfheaders::sf_polygon( poly_list, polygon_id = 3))
 }
-#' @title ...
+
+#' @title Creates a polygon from geos
 #' @name create_polygon_geos
 #'
-#' @param timeseries ...
+#' @param timeseries  a \code{numeric} or \code{matrix} object where the
+#'  columns is the point in time.
 #'
-#' @return a polygon object from \code{sf} class
+#' @return a polygon object from \code{geos} class.
 create_polygon_geos <- function(timeseries) {
 
   # verify if the time series are corrected
   timeseries <- .verify_timeseries(timeseries)
 
-  # TODO: comentar
+  # transform to polar space
   pts_values <- calculate_polar(timeseries)
 
   poly_list <- do.call(rbind, pts_values)
@@ -38,11 +41,13 @@ create_polygon_geos <- function(timeseries) {
                                  y = poly_list[,2],
                                  feature_id = poly_list[,3]))
 }
-#' @title ....
+
+#' @title Verify time series
 #' @name .verify_timeseries
 #'
-#' @param timeseries ...
-#' @return ...
+#' @param timeseries  a \code{numeric} or \code{matrix} object where the
+#'  columns is the point in time.
+#' @return a \code{matrix} from time series.
 .verify_timeseries <- function(timeseries) {
 
   # assert that only supported types are provided
@@ -56,14 +61,15 @@ create_polygon_geos <- function(timeseries) {
   return(timeseries)
 }
 
-#' @title ...
+#' @title Get all areas from a closed polar polygon
 #' @name get_all_areas
 #'
 #' @description The standard deviation of the areas per season
 #'
-#' @param timeseries ...
+#' @param timeseries  a \code{numeric} or \code{matrix} object where the
+#'  columns is the point in time.
 #'
-#' @return ...
+#' @return a \code{matrix} with each area from each quadrant.
 #' @export
 get_all_areas <- function(timeseries) {
 
@@ -102,12 +108,13 @@ get_all_areas <- function(timeseries) {
 
 }
 
-#' @title ...
+#' @title Get the number of lines contained in the polygon
 #' @name .get_instances
 #'
-#' @param polygon a \code{sf} object...
+#' @param polygon a \code{sf} object with Polygons.
 #'
-#' @return a \code{numeric} vector..
+#' @return a \code{numeric} vector with the number of lines contained in the
+#' polygon.
 .get_instances <- function(polygon) {
   nrow(sf::st_coordinates(polygon[1,])) - 1
 }

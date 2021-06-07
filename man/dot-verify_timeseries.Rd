@@ -2,16 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{.verify_timeseries}
 \alias{.verify_timeseries}
-\title{....}
+\title{Verify time series}
 \usage{
 .verify_timeseries(timeseries)
 }
 \arguments{
-\item{timeseries}{...}
+\item{timeseries}{a \code{numeric} or \code{matrix} object where the
+columns is the point in time.}
 }
 \value{
-...
+a \code{matrix} from time series.
 }
 \description{
-....
+Verify time series
 }

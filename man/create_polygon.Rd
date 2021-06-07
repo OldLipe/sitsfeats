@@ -2,16 +2,17 @@
 % Please edit documentation in R/utils.R
 \name{create_polygon}
 \alias{create_polygon}
-\title{...}
+\title{Creates a Polygon from sf package}
 \usage{
 create_polygon(timeseries)
 }
 \arguments{
-\item{timeseries}{...}
+\item{timeseries}{a \code{numeric} or \code{matrix} object where the
+columns is the point in time.}
 }
 \value{
-a polygon object from \code{sf} class
+a polygon object from \code{sf} class.
 }
 \description{
-...
+Creates a Polygon from sf package
 }
