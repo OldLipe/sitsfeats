@@ -41,4 +41,4 @@ Suggests:
     wk,
     covr
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
