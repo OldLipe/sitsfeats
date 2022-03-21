@@ -39,6 +39,8 @@
 #' @export
 area_q1 <- function(timeseries) {
 
+  # TODO: convert to cpp implement
+
   # create a sf polygons object
   polygon <- create_polygon(timeseries)
 
@@ -60,6 +62,8 @@ area_q1 <- function(timeseries) {
 #' @rdname polar_metrics
 #' @export
 area_q2 <- function(timeseries) {
+
+  # TODO: convert to cpp implement
 
   # create a sf polygons object
   polygon <- create_polygon(timeseries)
@@ -83,6 +87,8 @@ area_q2 <- function(timeseries) {
 #' @export
 area_q3 <- function(timeseries) {
 
+  # TODO: convert to cpp implement
+
   # create a sf polygons object
   polygon <- create_polygon(timeseries)
 
@@ -104,6 +110,8 @@ area_q3 <- function(timeseries) {
 #' @rdname polar_metrics
 #' @export
 area_q4 <- function(timeseries) {
+
+  # TODO: convert to cpp implement
 
   # create a sf polygons object
   polygon <- create_polygon(timeseries)
@@ -164,6 +172,7 @@ ecc_metric <- function(timeseries) {
   # Transforming to geos to sf
   pts_sf <- sf::st_as_sf(pts_mbr)
 
+  # TODO: compute in armadillo
   st_bbox_by_feature = function(sf_obj) {
     geom <- sf::st_geometry(sf_obj)
     do.call(rbind, lapply(geom, sf::st_bbox))
@@ -183,6 +192,7 @@ gyration_radius <- function(timeseries) {
   # get number of column
   size_col <- .get_instances(polygon)
 
+  # TODO: how to calculate centroide?
   pts_cent <- sf::st_coordinates(sf::st_centroid(polygon))
   pts_line <- sf::st_coordinates(sfheaders::sf_cast(polygon, "LINESTRING"))[,1:2]
 
@@ -193,6 +203,7 @@ gyration_radius <- function(timeseries) {
 #' @export
 csi <- function(timeseries) {
 
+  # TODO: convert to cpp implement
   polygon <- create_polygon(timeseries)
   ls <- sfheaders::sf_cast(polygon, "LINESTRING")
 
