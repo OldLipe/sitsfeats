@@ -39,6 +39,7 @@ Suggests:
     Rcpp,
     RcppArmadillo,
     wk,
-    covr
+    covr,
+    Rcatch22
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
