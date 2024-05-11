@@ -2,7 +2,7 @@ Package: sitsfeats
 Type: Package
 Title: Satellite Image Time Series Features
 Version: 0.0.1
-Date: 2021-06-02
+Date: 2024-05-10
 Authors@R: 
     c(person(given = "Felipe",
              family = "Carvalho", 
