@@ -19,8 +19,8 @@ The goal of the sitsfeats package is to extract temporal metrics from
 satellite images time series. The metrics implemented in this version
 are:
 
-  - **basics**: statistics metrics
-  - **polar**: polar metrics
+- **basics**: statistics metrics
+- **polar**: polar metrics
 
 The implementations of this package are based on the
 [stmetrics](https://github.com/brazil-data-cube/stmetrics) library in
@@ -54,13 +54,13 @@ library(tibble)
 # loading example time series
 data("timeseries")
 
-polar_metrics <- tibble::tibble(area_q1 = sitsfeats::area_q1(timeseries),
-                                area_q2 = sitsfeats::area_q2(timeseries),
-                                area_q3 = sitsfeats::area_q3(timeseries),
-                                area_q4 = sitsfeats::area_q3(timeseries))
+polar_metrics <- tibble::tibble(area_q1 = area_q1(timeseries),
+                                area_q2 = area_q2(timeseries),
+                                area_q3 = area_q3(timeseries),
+                                area_q4 = area_q3(timeseries))
 
 polar_metrics
-#> # A tibble: 5 x 4
+#> # A tibble: 5 × 4
 #>   area_q1[,1] area_q2[,1] area_q3[,1] area_q4[,1]
 #>         <dbl>       <dbl>       <dbl>       <dbl>
 #> 1   29443841.   14207184.   30180681.   30180681.
@@ -77,7 +77,7 @@ polar_metrics
 one_instance <- timeseries[1,]
 
 # plot first time series example
-sitsfeats::polar_plot(one_instance)
+polar_plot(one_instance)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
