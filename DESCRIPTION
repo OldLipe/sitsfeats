@@ -31,7 +31,6 @@ Imports:
     sf,
     sfheaders,
     geos,
-    libgeos,
     ggplot2,
     cowplot
 Suggests: 
@@ -41,4 +40,4 @@ Suggests:
     wk,
     covr
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1
