@@ -2,7 +2,7 @@ Package: sitsfeats
 Type: Package
 Title: Satellite Image Time Series Features
 Version: 0.0.1
-Date: 2021-06-02
+Date: 2024-05-10
 Authors@R: 
     c(person(given = "Felipe",
              family = "Carvalho", 
@@ -31,7 +31,6 @@ Imports:
     sf,
     sfheaders,
     geos,
-    libgeos,
     ggplot2,
     cowplot
 Suggests: 
@@ -41,4 +40,4 @@ Suggests:
     wk,
     covr
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1

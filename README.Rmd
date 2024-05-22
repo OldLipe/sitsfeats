@@ -58,10 +58,10 @@ library(tibble)
 # loading example time series
 data("timeseries")
 
-polar_metrics <- tibble::tibble(area_q1 = sitsfeats::area_q1(timeseries),
-                                area_q2 = sitsfeats::area_q2(timeseries),
-                                area_q3 = sitsfeats::area_q3(timeseries),
-                                area_q4 = sitsfeats::area_q3(timeseries))
+polar_metrics <- tibble::tibble(area_q1 = area_q1(timeseries),
+                                area_q2 = area_q2(timeseries),
+                                area_q3 = area_q3(timeseries),
+                                area_q4 = area_q3(timeseries))
 
 polar_metrics
 ```
@@ -73,8 +73,9 @@ polar_metrics
 one_instance <- timeseries[1,]
 
 # plot first time series example
-sitsfeats::polar_plot(one_instance)
+polar_plot(one_instance)
 ```
 
 ## Getting help
+
 Feel free to create issues if you have any questions.
